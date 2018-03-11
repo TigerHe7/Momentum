@@ -8,6 +8,7 @@ import {
 import RoundedButton from './../components/rounded_button';
 import Colors from './../styles/colors';
 import ProgressBar from  './../components/progress_bar';
+import CategoryIdentifier from './../components/category_identifier';
 
 export default class MyComponent extends Component {
 	constructor(props) {
@@ -17,6 +18,8 @@ export default class MyComponent extends Component {
   render() {
 		const { state, actions } = this.props.screenProps;
 		const {startTask, pauseTask} = { ...actions };
+    const index = this.props.navigation.state.params.index;
+    const categoryColor = this.props.navigation.state.params.categoryColor;
 
 		// center button props
 		let buttonCenterName = '';
@@ -25,28 +28,31 @@ export default class MyComponent extends Component {
 		if (state.focusedTask.currentTaskState === 'STARTED') {
 			buttonCenterName = 'Pause';
 			buttonCenterAction = pauseTask;
-			buttonCenterColor = Colors.buttonBackgroundPause;
+			buttonCenterColor = categoryColor; //Colors.buttonBackgroundPause;
 		} else if (state.focusedTask.currentTaskState === 'PAUSED') {
 			buttonCenterName = 'Start';
 			buttonCenterAction = startTask;
 			buttonCenterColor = Colors.buttonBackgroundStart;
 		}
 
-    const title = state.focusedTask.currentTask.name;
+    const task = state.focusedTask.dailyTasks[index];
+
+    const title = task.name;
+    const maxTime = task.timeEstimate;
+    const taskTimeIntervals = task.taskTimeIntervals;
+    const category = task.category;
 
     return (
       <View style={styles.container}>
 				<StatusBar hidden={true} />
 
-        <Text style={styles.task_title}>{title}</Text>
-				<View
-					style={styles.image_container}>
-				</View>
+        <Text style={styles.taskTitle}>{title}</Text>
+        <CategoryIdentifier color={categoryColor}>{category}</CategoryIdentifier>
 
 				<View style={styles.progressBarContainer}>
 					<ProgressBar
-						taskTimeIntervals={state.focusedTask.currentTask.taskTimeIntervals}
-						maxTime={3}/>
+						taskTimeIntervals={taskTimeIntervals}
+						maxTime={maxTime}/>
 				</View>
 
 				<View style={styles.buttons_container}>
@@ -56,7 +62,7 @@ export default class MyComponent extends Component {
 						color={Colors.buttonBackgroundFinish}/>
 					<RoundedButton
 						title={buttonCenterName}
-						onPress={buttonCenterAction}
+						onPress={() => { buttonCenterAction(index) }}
 						color={buttonCenterColor}/>
 					<RoundedButton
 						title='Log'
@@ -77,9 +83,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.background,
   },
-	task_title: {
-		fontSize: 20,
+	taskTitle: {
+		fontSize: 18,
 		textAlign: 'center',
+    marginBottom: 5,
 	},
 	image_container: {
 		height: 250,

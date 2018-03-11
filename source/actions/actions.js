@@ -1,13 +1,15 @@
 import * as types from './actionTypes';
 
-export function startTask() {
+export function startTask(index) {
   return {
-    type: types.START_TASK
+    type: types.START_TASK,
+    index,
   };
 }
 
-export function pauseTask() {
+export function pauseTask(index) {
   return {
-    type: types.PAUSE_TASK
+    type: types.PAUSE_TASK,
+    index,
   };
 }

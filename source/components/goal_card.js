@@ -22,31 +22,43 @@ class GoalCard extends React.Component<{
     onPress: PropTypes.func.isRequired,
   };
 
+  handleOnPress(func) {
+    requestAnimationFrame(() => {
+      func();
+    });
+  }
+
   render() {
     const { onPress, data } = this.props;
 		const name = data.name;
     const category = data.category;
 
     // time for top right corner
-    let time = Time.formatFromSeconds(data.secondsSpent, true);
-    if (time != '0m') {
-      time += ' / ' + Time.formatFromSeconds(data.timeEstimate * 60);
-    } else {
-      time = Time.formatFromSeconds(data.timeEstimate * 60);
-    }
+    // let time = Time.formatFromSeconds(data.secondsSpent, true);
+    // if (time != '0m') {
+    //   time += ' / ' + Time.formatFromSeconds(data.timeEstimate * 60);
+    // } else {
+    //   time = Time.formatFromSeconds(data.timeEstimate * 60);
+    // }
+    const progress = ' ';
+
+    let time = data.timeEstimate * 60 - data.secondsSpent;
+    if (time < 0) time = 0;
+    const timeString = Time.formatFromSeconds(time, true);
     return (
 			<TouchableNativeFeedback
 				style={styles.touchable}
         useForeground={true}
         background={TouchableNativeFeedback.SelectableBackground()}
-				onPress={onPress}>
+				onPress={() => {this.handleOnPress(onPress)}}>
 				<View style={styles.container}>
 					<View style={styles.textContainer}>
           	<Text style={styles.nameText}>{name}</Text>
             <CategoryIdentifier color={this.props.categoryColor}>{category}</CategoryIdentifier>
 					</View>
           <View style={styles.statsContainer}>
-            <Text style={styles.timeEstimate}>{time}</Text>
+            <Text style={styles.nameText}>{progress}</Text>
+            <Text style={styles.text}>{timeString}</Text>
           </View>
 				</View>
 			</TouchableNativeFeedback>
@@ -76,9 +88,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   text: {
-    color: 'grey',
-    textAlign: 'center',
-    fontWeight: '200',
 		fontSize: 12,
   },
   nameText: {

@@ -77,21 +77,21 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	textContainer: {
-		width: '95%',
+		width: '100%',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
 	timeText: {
-		fontSize: 16,
+		fontSize: 14,
 		marginBottom: 10,
 	},
 	progressBarBase: {
 		width: '100%',
-		height: 8,
+		height: 5,
 		backgroundColor: Colors.progressBarBackground,
 		alignItems: 'flex-start',
 		justifyContent: 'center',
-		borderRadius: 5,
+		borderRadius: 8,
 	},
   progressBar: {
       backgroundColor: Colors.progressBarFill,

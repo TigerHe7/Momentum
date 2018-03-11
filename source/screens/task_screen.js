@@ -13,15 +13,17 @@ import GoalCard from './../components/goal_card';
 import Time from './../util/time'
 
 const renderTaskCards = function({item}) {
-  console.log(item.categoryColor);
+  console.log(item.index);
 	return (
 		<View	style={styles.taskCardContainer}>
-      <View style={styles.divider}/>
 			<GoalCard
 				data={item}
         categoryColor={item.categoryColor}
-				onPress={() => {this.props.navigation.navigate("FocusScreen")}}/>
-      {item.last && <View style={styles.divider}/>}
+				onPress={() => {this.props.navigation.navigate("FocusScreen", {
+          index: item.index,
+          categoryColor: item.categoryColor,
+        })}}/>
+      <View style={styles.divider}/>
 		</View>
 	)
 }
@@ -42,6 +44,7 @@ export default class MyComponent extends Component {
             {Time.getCurrentFormattedDate()}
           </Text>
         </View>
+        <View style={styles.divider}/>
 				<FlatList
 					style={styles.scrollview}
 					alwaysBounceVertical={true}
@@ -50,6 +53,7 @@ export default class MyComponent extends Component {
 						return {
 							...task,
 							key: task.name,
+              index: index,
               categoryColor: state.focusedTask.categories[task.category].color,
               last: index === state.focusedTask.dailyTasks.length - 1,
 						}
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
 	},
   titleDate: {
-    fontSize: 14,
+    fontSize: 16,
   },
 	scrollview: {
 		flex: 1,
