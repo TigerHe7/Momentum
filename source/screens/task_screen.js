@@ -20,7 +20,8 @@ const renderTaskCards = function({item}) {
 			<GoalCard
 				data={item}
         categoryColor={item.categoryColor}
-				onPress={() => {}}/>
+				onPress={() => {this.props.navigation.navigate("FocusScreen")}}/>
+      {item.last && <View style={styles.divider}/>}
 		</View>
 	)
 }
@@ -33,23 +34,27 @@ export default class MyComponent extends Component {
     return (
       <View style={styles.container}>
 				<StatusBar hidden={true} />
-				<Text style={styles.taskTitle}>
-					{Time.getCurrentFormattedDate()}
-				</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>
+            {'Today'}
+          </Text>
+          <Text style={styles.titleDate}>
+            {Time.getCurrentFormattedDate()}
+          </Text>
+        </View>
 				<FlatList
 					style={styles.scrollview}
 					alwaysBounceVertical={true}
 					overScrollMode='auto'
-					data={state.focusedTask.dailyTasks.map((task) => {
-            console.log(JSON.stringify(task.category));
-            console.log(JSON.stringify(state.focusedTask.categories[task.category].color));
+					data={state.focusedTask.dailyTasks.map((task, index) => {
 						return {
 							...task,
 							key: task.name,
               categoryColor: state.focusedTask.categories[task.category].color,
+              last: index === state.focusedTask.dailyTasks.length - 1,
 						}
 					})}
-					renderItem={renderTaskCards}>
+					renderItem={({item}) => {return renderTaskCards.call(this, {item})}}>
 				</FlatList>
       </View>
     );
@@ -59,16 +64,28 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     backgroundColor: Colors.background,
   },
-	taskTitle: {
-		fontSize: 20,
-		textAlign: 'center',
-		marginTop: 30,
-		marginBottom: 30,
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 25,
+    width: '100%',
+    alignItems: 'flex-end',
+    paddingHorizontal: 16,
+    marginTop: 50,
+    marginBottom: 10,
+  },
+	title: {
+		fontSize: 18,
+    fontWeight: '500',
+    marginRight: 10,
 	},
+  titleDate: {
+    fontSize: 14,
+  },
 	scrollview: {
 		flex: 1,
 		width: '100%',
