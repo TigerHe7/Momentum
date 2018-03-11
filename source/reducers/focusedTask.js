@@ -1,36 +1,53 @@
 import * as types from '../actions/actionTypes';
+import CategoryColors from '../styles/categoryColors';
 
 const initialState = {
-  taskState: 'PAUSED',
+  // taskState: 'PAUSED',
 	taskTimeIntervals: [],
 	currentTaskState: 'PAUSED',
 	currentTask: {
 		name: 'Walk the dogs',
+    category: 'Personal',
 		secondsSpent: 150,
 		timeEstimate: 30,
 		taskTimeIntervals: [],
 	},
+  categories: {
+    Personal: {
+      color: CategoryColors.indigo,
+    },
+    Career: {
+      color: CategoryColors.red,
+    },
+    Health: {
+      color: CategoryColors.yellow,
+    },
+  },
 	dailyTasks: [
 		{
 			name: 'Walk the dogs',
+      category: 'Personal',
 			secondsSpent: 150,
 			timeEstimate: 30,
 			taskTimeIntervals: [],
 		},
 		{
 			name: 'Go grocery shopping',
-			secondsSpent: 150,
+      category: 'Personal',
+			secondsSpent: 0,
 			timeEstimate: 60,
 			taskTimeIntervals: [],
 		},
 		{
 			name: 'Work out',
+      category: 'Health',
 			secondsSpent: 150,
 			timeEstimate: 120,
 			taskTimeIntervals: [],
 		},
 		{
 			name: 'Work on react native app',
+      category: 'Career',
 			secondsSpent: 150,
 			timeEstimate: 75,
 			taskTimeIntervals: [],
@@ -39,7 +56,6 @@ const initialState = {
 };
 
 export default function focusedTask(state = initialState, action = {}) {
-	const time = new Date();
   switch (action.type) {
     case types.START_TASK:
       return {
@@ -47,7 +63,7 @@ export default function focusedTask(state = initialState, action = {}) {
 				currentTaskState: 'STARTED',
 				currentTask: {
 					...state.currentTask,
-					taskTimeIntervals: state.currentTask.taskTimeIntervals.concat([time]),
+					taskTimeIntervals: state.currentTask.taskTimeIntervals.concat([new Date()]),
 				}
       };
     case types.PAUSE_TASK:
@@ -56,7 +72,7 @@ export default function focusedTask(state = initialState, action = {}) {
 				currentTaskState: 'PAUSED',
 				currentTask: {
 					...state.currentTask,
-					taskTimeIntervals: state.currentTask.taskTimeIntervals.concat([time]),
+					taskTimeIntervals: state.currentTask.taskTimeIntervals.concat([new Date()]),
 				}
       };
     default:

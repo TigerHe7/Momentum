@@ -51,3 +51,6 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+
+# babel auto-generated file (I think)
+package-lock.json

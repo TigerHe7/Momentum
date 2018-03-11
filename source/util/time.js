@@ -4,9 +4,13 @@ const secondsInDay = 86400;
 const secondsInHour = 3600;
 const secondsInMinute = 60;
 
-Time.formatFromSeconds = function(totalSeconds) {
+Time.formatFromSeconds = function(totalSeconds, minutesMinimum = false) {
 	if (totalSeconds === 0) {
-		return '0s'
+		if (minutesMinimum) {
+			return '0m';
+		} else {
+			return '0s';
+		}
 	}
 
 	let seconds = totalSeconds;
@@ -42,11 +46,13 @@ Time.formatFromSeconds = function(totalSeconds) {
 		minutesSet = true;
 	}
 
-	if (seconds > 0) {
-		if (minutesSet) {
-			returnString += ' ';
+	if (!minutesMinimum) {
+		if (seconds > 0) {
+			if (minutesSet) {
+				returnString += ' ';
+			}
+			returnString += seconds + 's'
 		}
-		returnString += seconds + 's'
 	}
 
 	return returnString;

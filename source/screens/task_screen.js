@@ -13,11 +13,13 @@ import GoalCard from './../components/goal_card';
 import Time from './../util/time'
 
 const renderTaskCards = function({item}) {
+  console.log(item.categoryColor);
 	return (
-		<View
-			style={styles.taskCardContainer}>
+		<View	style={styles.taskCardContainer}>
+      <View style={styles.divider}/>
 			<GoalCard
 				data={item}
+        categoryColor={item.categoryColor}
 				onPress={() => {}}/>
 		</View>
 	)
@@ -39,9 +41,12 @@ export default class MyComponent extends Component {
 					alwaysBounceVertical={true}
 					overScrollMode='auto'
 					data={state.focusedTask.dailyTasks.map((task) => {
+            console.log(JSON.stringify(task.category));
+            console.log(JSON.stringify(state.focusedTask.categories[task.category].color));
 						return {
 							...task,
 							key: task.name,
+              categoryColor: state.focusedTask.categories[task.category].color,
 						}
 					})}
 					renderItem={renderTaskCards}>
@@ -75,4 +80,10 @@ const styles = StyleSheet.create({
 		// paddingHorizontal: 15,
 		// paddingVertical: 8,
 	},
+  divider: {
+    width: '100%',
+    height: 0.8,
+    backgroundColor: 'grey',
+    opacity: 0.2,
+  },
 });

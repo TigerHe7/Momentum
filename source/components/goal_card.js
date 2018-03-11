@@ -11,6 +11,8 @@ const TouchableOpacity = require('TouchableOpacity');
 const View = require('View');
 
 import Colors from './../styles/colors';
+import CategoryIdentifier from './../components/category_identifier';
+import Time from './../util/time';
 
 class GoalCard extends React.Component<{
   onPress: () => any,
@@ -23,65 +25,65 @@ class GoalCard extends React.Component<{
   render() {
     const { onPress, data } = this.props;
 		const name = data.name;
-		const time = data.timeEstimate;
+    const category = data.category;
+
+    // time for top right corner
+    let time = Time.formatFromSeconds(data.secondsSpent, true);
+    if (time != '0m') {
+      time += ' / ' + Time.formatFromSeconds(data.timeEstimate * 60);
+    } else {
+      time = Time.formatFromSeconds(data.timeEstimate * 60);
+    }
     return (
-			<TouchableOpacity
+			<TouchableNativeFeedback
 				style={styles.touchable}
+        useForeground={true}
+        background={TouchableNativeFeedback.SelectableBackground()}
 				onPress={onPress}>
 				<View style={styles.container}>
-					{/* <View style={styles.iconContainer}/> */}
 					<View style={styles.textContainer}>
-          	<Text style={styles.text}>{name}</Text>
-						<Text style={styles.text}>{time}</Text>
+          	<Text style={styles.nameText}>{name}</Text>
+            <CategoryIdentifier color={this.props.categoryColor}>{category}</CategoryIdentifier>
 					</View>
+          <View style={styles.statsContainer}>
+            <Text style={styles.timeEstimate}>{time}</Text>
+          </View>
 				</View>
-			</TouchableOpacity>
+			</TouchableNativeFeedback>
     );
   }
 }
 
 const styles = StyleSheet.create({
-	touchable: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		elevation: 2,
-		borderRadius: 10,
-		width: '100%',
-		height: 85,
-		backgroundColor: Colors.goalIconBackground,
-	},
 	container: {
-		height: '100%',
+		height: 85,
 		width: '100%',
 		flexDirection: 'row',
-		justifyContent: 'flex-start',
+    justifyContent: 'center',
 		alignItems: 'center',
-	},
-	iconContainer: {
-		backgroundColor: 'darkgrey',
-		height: '100%',
-		width: 100,
-		// borderRadius: 100,
-		marginLeft: 15,
-		borderLeftWidth: 5,
-		borderRadius: 10,
-		// flex: 2,
+    padding: 16,
 	},
 	textContainer: {
 		height: '100%',
-		flex: 11,
-		justifyContent: 'center',
-		alignItems: 'center',
-		// backgroundColor: 'black',
+    width: '50%',
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
 	},
+  statsContainer: {
+    height: '100%',
+    width: '50%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+  },
   text: {
     color: 'grey',
     textAlign: 'center',
-    paddingHorizontal: 12,
-		paddingVertical: 6,
     fontWeight: '200',
-		fontSize: 14,
+		fontSize: 12,
+  },
+  nameText: {
+    fontSize: 16,
+    marginBottom: 5,
   },
 });
 
