@@ -31,7 +31,7 @@ const renderTaskCards = function({item}) {
 export default class MyComponent extends Component {
   render() {
 		const { state, actions } = this.props.screenProps;
-		const {startTask, pauseTask} = { ...actions };
+		const {startTask, pauseTask, finishTask} = { ...actions };
 		const date = new Date();
     return (
       <View style={styles.container}>
@@ -98,8 +98,6 @@ const styles = StyleSheet.create({
 	taskCardContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		// paddingHorizontal: 15,
-		// paddingVertical: 8,
 	},
   divider: {
     width: '100%',

@@ -59,7 +59,7 @@ export default function focusedTask(state = initialState, action = {}) {
 				dailyTasks: state.dailyTasks.map((task, index) => {
 					if (index === action.index) {
 						return {
-							...state.dailyTasks[action.index],
+							...state.dailyTasks[index],
 							currentTaskState: 'STARTED',
 							taskTimeIntervals: state.dailyTasks[action.index].taskTimeIntervals.concat([new Date()]),
 						}
@@ -73,7 +73,7 @@ export default function focusedTask(state = initialState, action = {}) {
 				dailyTasks: state.dailyTasks.map((task, index) => {
 					if (index === action.index) {
 						return {
-							...state.dailyTasks[action.index],
+							...state.dailyTasks[index],
 							currentTaskState: 'PAUSED',
 							taskTimeIntervals: state.dailyTasks[action.index].taskTimeIntervals.concat([new Date()]),
 						}
@@ -81,6 +81,27 @@ export default function focusedTask(state = initialState, action = {}) {
 					return task;
 				})
       };
+		case types.FINISH_TASK:
+			return {
+				...state,
+				dailyTasks: state.dailyTasks.map((task, index) => {
+					if (index === action.index) {
+						if (state.dailyTasks[index].currentTaskState === 'STARTED') {
+							return {
+								...state.dailyTasks[index],
+								taskTimeIntervals: state.dailyTasks[action.index].taskTimeIntervals.concat([new Date()]),
+								currentTaskState: 'FINISHED',
+							}
+						} else {
+							return {
+								...state.dailyTasks[index],
+								currentTaskState: 'FINISHED',
+							}
+						}
+					}
+					return task;
+				})
+			};
     default:
       return state;
   }

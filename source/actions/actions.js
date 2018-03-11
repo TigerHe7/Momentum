@@ -13,3 +13,10 @@ export function pauseTask(index) {
     index,
   };
 }
+
+export function finishTask(index) {
+  return {
+    type: types.FINISH_TASK,
+    index,
+  };
+}

@@ -17,7 +17,7 @@ export default class MyComponent extends Component {
 
   render() {
 		const { state, actions } = this.props.screenProps;
-		const {startTask, pauseTask} = { ...actions };
+		const {startTask, pauseTask, finishTask} = { ...actions };
     const index = this.props.navigation.state.params.index;
     const categoryColor = this.props.navigation.state.params.categoryColor;
 
@@ -31,7 +31,7 @@ export default class MyComponent extends Component {
 			buttonCenterName = 'Pause';
 			buttonCenterAction = pauseTask;
 			buttonCenterColor = categoryColor; //Colors.buttonBackgroundPause;
-		} else if (task.currentTaskState === 'PAUSED') {
+		} else if (task.currentTaskState === 'PAUSED' || task.currentTaskState === 'FINISHED') {
 			buttonCenterName = 'Start';
 			buttonCenterAction = startTask;
 			buttonCenterColor = Colors.buttonBackgroundStart;
@@ -65,7 +65,7 @@ export default class MyComponent extends Component {
             color={buttonCenterColor}/>
 					<RoundedButton
 						title='Finish'
-						onPress={() => {}}
+						onPress={() => { finishTask(index) }}
 						color={Colors.buttonBackgroundFinish}/>
 					{/* <RoundedButton
 						title='Log'
