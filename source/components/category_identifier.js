@@ -15,11 +15,28 @@ import Colors from './../styles/colors';
 class CategoryIdentifier extends React.Component<{
 }> {
   render() {
-    const colorStyles = [styles.color, {backgroundColor: this.props.color}];
+
+    const colorStyles = [styles.color];
+    if (this.props.color) {
+      colorStyles.push({backgroundColor: this.props.color});
+    }
+    if (this.props.dotSize) {
+      colorStyles.push({
+        height: this.props.dotSize,
+        width: this.props.dotSize,
+        borderRadius: this.props.dotSize,
+      });
+    }
+
+    const textStyles = [styles.text];
+    if (this.props.fontSize) {
+      textStyles.push({fontSize: this.props.fontSize});
+    }
+
     return (
 			<View style={styles.container}>
         <View style={colorStyles}/>
-        <Text style={styles.text}>{this.props.children}</Text>
+        <Text style={textStyles}>{this.props.children}</Text>
 			</View>
     );
   }

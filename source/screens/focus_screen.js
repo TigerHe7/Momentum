@@ -21,21 +21,21 @@ export default class MyComponent extends Component {
     const index = this.props.navigation.state.params.index;
     const categoryColor = this.props.navigation.state.params.categoryColor;
 
+    const task = state.focusedTask.dailyTasks[index];
+
 		// center button props
 		let buttonCenterName = '';
 		let buttonCenterAction = () => {};
 		let buttonCenterColor = 'grey';
-		if (state.focusedTask.currentTaskState === 'STARTED') {
+		if (task.currentTaskState === 'STARTED') {
 			buttonCenterName = 'Pause';
 			buttonCenterAction = pauseTask;
 			buttonCenterColor = categoryColor; //Colors.buttonBackgroundPause;
-		} else if (state.focusedTask.currentTaskState === 'PAUSED') {
+		} else if (task.currentTaskState === 'PAUSED') {
 			buttonCenterName = 'Start';
 			buttonCenterAction = startTask;
 			buttonCenterColor = Colors.buttonBackgroundStart;
 		}
-
-    const task = state.focusedTask.dailyTasks[index];
 
     const title = task.name;
     const maxTime = task.timeEstimate;
@@ -47,7 +47,10 @@ export default class MyComponent extends Component {
 				<StatusBar hidden={true} />
 
         <Text style={styles.taskTitle}>{title}</Text>
-        <CategoryIdentifier color={categoryColor}>{category}</CategoryIdentifier>
+        <CategoryIdentifier
+          dotSize={10}
+          fontSize={14}
+          color={categoryColor}>{category}</CategoryIdentifier>
 
 				<View style={styles.progressBarContainer}>
 					<ProgressBar
@@ -56,19 +59,19 @@ export default class MyComponent extends Component {
 				</View>
 
 				<View style={styles.buttons_container}>
+          <RoundedButton
+            title={buttonCenterName}
+            onPress={() => { buttonCenterAction(index) }}
+            color={buttonCenterColor}/>
 					<RoundedButton
 						title='Finish'
 						onPress={() => {}}
 						color={Colors.buttonBackgroundFinish}/>
-					<RoundedButton
-						title={buttonCenterName}
-						onPress={() => { buttonCenterAction(index) }}
-						color={buttonCenterColor}/>
-					<RoundedButton
+					{/* <RoundedButton
 						title='Log'
 						onPress={() => {
 						}}
-						color={Colors.buttonBackgroundLog}/>
+						color={Colors.buttonBackgroundLog}/> */}
 				</View>
 
       </View>
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
   },
 	taskTitle: {
-		fontSize: 18,
+		fontSize: 20,
 		textAlign: 'center',
     marginBottom: 5,
 	},

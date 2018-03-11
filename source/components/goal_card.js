@@ -31,20 +31,21 @@ class GoalCard extends React.Component<{
   render() {
     const { onPress, data } = this.props;
 		const name = data.name;
+    const status = data.currentTaskState;
     const category = data.category;
-
-    // time for top right corner
-    // let time = Time.formatFromSeconds(data.secondsSpent, true);
-    // if (time != '0m') {
-    //   time += ' / ' + Time.formatFromSeconds(data.timeEstimate * 60);
-    // } else {
-    //   time = Time.formatFromSeconds(data.timeEstimate * 60);
-    // }
-    const progress = ' ';
 
     let time = data.timeEstimate * 60 - data.secondsSpent;
     if (time < 0) time = 0;
     const timeString = Time.formatFromSeconds(time, true);
+
+    let progress = ' ';
+    // if (status === 'PAUSED' && data.secondsSpent > 0) {
+    //   progress = 'paused';
+    // } else if (status === 'STARTED') {
+    //   progress = 'in progress';
+    // }
+
+
     return (
 			<TouchableNativeFeedback
 				style={styles.touchable}
@@ -57,7 +58,7 @@ class GoalCard extends React.Component<{
             <CategoryIdentifier color={this.props.categoryColor}>{category}</CategoryIdentifier>
 					</View>
           <View style={styles.statsContainer}>
-            <Text style={styles.nameText}>{progress}</Text>
+            <Text style={styles.progressText}>{progress}</Text>
             <Text style={styles.text}>{timeString}</Text>
           </View>
 				</View>
@@ -91,6 +92,10 @@ const styles = StyleSheet.create({
 		fontSize: 12,
   },
   nameText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  progressText: {
     fontSize: 16,
     marginBottom: 5,
   },

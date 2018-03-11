@@ -68,8 +68,8 @@ class RoundedButton extends React.Component<{
 
 const styles = StyleSheet.create({
   container: {
-    width: 90,
-    height: 35,
+    width: 80,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,
-    backgroundColor: '#2196F3',
+    backgroundColor: 'grey',
     borderRadius: 24,
     width: 85,
     height: 35,
