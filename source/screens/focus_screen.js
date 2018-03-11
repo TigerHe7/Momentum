@@ -32,11 +32,13 @@ export default class MyComponent extends Component {
 			buttonCenterColor = Colors.buttonBackgroundStart;
 		}
 
+    const title = state.focusedTask.currentTask.name;
+
     return (
       <View style={styles.container}>
 				<StatusBar hidden={true} />
 
-        <Text style={styles.task_title}>Your Current Task</Text>
+        <Text style={styles.task_title}>{title}</Text>
 				<View
 					style={styles.image_container}>
 				</View>

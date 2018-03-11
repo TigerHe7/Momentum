@@ -27,7 +27,19 @@ class RoundedButton extends React.Component<{
 
 	constructor(props) {
 		super(props);
+    this.state = {
+      viewStyles: {
+        width: '100%',
+        height: '100%',
+      }
+    }
 	}
+
+  handleOnPress(func) {
+    requestAnimationFrame(() => {
+      func();
+    });
+  }
 
   render() {
     const {
@@ -35,45 +47,47 @@ class RoundedButton extends React.Component<{
       onPress,
       title,
     } = this.props;
-    const touchableStyles = [styles.touchable];
-    const textStyles = [styles.text];
+    const touchableStyles = [styles.touchable, this.state.viewStyles];
     if (color) {
         touchableStyles.push({backgroundColor: color});
     }
     return (
-      <TouchableNativeFeedback
-				style={touchableStyles}
-        onPress={onPress}
-				activeOpacity={0.6}>
-        <View
-					style={styles.view}>
-          <Text style={textStyles}>{this.props.title}</Text>
-        </View>
-      </TouchableNativeFeedback>
+      <View style={styles.container}>
+        <TouchableOpacity
+  				style={touchableStyles}
+          onPressIn={() => {this.setState({viewStyles: {width: '95%', height: '95%'}})}}
+          onPressOut={() => {this.setState({viewStyles: {width: '100%', height: '100%'}})}}
+          onPress={() => {this.handleOnPress(onPress)}}
+  				activeOpacity={1}>
+          <Text style={styles.text}>{this.props.title}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: 90,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   touchable: {
-      elevation: 4,
-      backgroundColor: '#2196F3',
-      borderRadius: 24,
-  	},
-	view: {
-		width: 85,
-		height: 35,
-		alignItems: 'center',
-		justifyContent: 'center',
-		paddingHorizontal: 12,
-		paddingVertical: 6,
-	},
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+    backgroundColor: '#2196F3',
+    borderRadius: 24,
+    width: 85,
+    height: 35,
+  },
   text: {
-      color: Colors.textLight,
-      textAlign: 'center',
-      fontWeight: '200',
-			fontSize: 14,
-    },
+    color: Colors.textLight,
+    textAlign: 'center',
+    fontWeight: '200',
+		fontSize: 14,
+  },
 });
 
 module.exports = RoundedButton;

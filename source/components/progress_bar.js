@@ -40,8 +40,6 @@ class ProgressBar extends React.Component<{
 				timeSpent += Math.floor((end.getTime() - start.getTime()) / 1000);
 			}
 		});
-		console.log('Time Spent:');
-		console.log(timeSpent);
 
 		const currentTime = Time.formatFromSeconds(timeSpent);
 		const maxTime = Time.formatFromSeconds(this.props.maxTime * 60);

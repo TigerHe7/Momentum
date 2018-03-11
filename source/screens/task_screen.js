@@ -12,12 +12,6 @@ import Colors from './../styles/colors';
 import GoalCard from './../components/goal_card';
 import Time from './../util/time'
 
-{/* <View style={styles.taskCardContainer}>
-	<GoalCard
-	title='wow'
-	onPress={() => {}}/>
-</View> */}
-
 const renderTaskCards = function({item}) {
 	return (
 		<View
@@ -78,7 +72,7 @@ const styles = StyleSheet.create({
 	taskCardContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingHorizontal: 15,
-		paddingVertical: 8,
+		// paddingHorizontal: 15,
+		// paddingVertical: 8,
 	},
 });
