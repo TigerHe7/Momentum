@@ -20,7 +20,7 @@ const RouteConfigs = {
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: TaskScreen,
+  initialRouteName: 'TaskScreen',
 }
 
-export default TaskScreenNav = StackNavigator(RouteConfigs);
+export default TaskScreenNav = StackNavigator(RouteConfigs, StackNavigatorConfig);

@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   task_title: {
     fontSize: 20,
     textAlign: 'center',
-    // margin: ,
   },
   instructions: {
     textAlign: 'center',

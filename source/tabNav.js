@@ -11,12 +11,15 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import FocusScreen from './screens/focus_screen';
-import TaskScreenNav from './taskScreenNav'
+import PlanningScreenNav from './planScreenNav';
+import TaskScreenNav from './taskScreenNav';
+
+import FocusScreen from './screens/focus_screen'
 import ProfileScreen from './screens/profile_screen';
 import GoalScreen from  './screens/goal_screen';
 
 const routeConfiguration = 	{
+		PlanningScreen: { screen: PlanningScreenNav},
 		TaskScreen: { screen: TaskScreenNav },
 		// FocusScreen: { screen: FocusScreen},
 		GoalScreen: { screen: GoalScreen },
@@ -36,6 +39,9 @@ const tabBarConfiguration = {
 			} else if (routeName === 'TaskScreen') {
 				iconName = 'calendar-text'
 				return <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />;
+			} else if (routeName === 'PlanningScreen') {
+				iconName = 'calendar-text'
+				return <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />;
 			}
     },
   }),
@@ -44,7 +50,7 @@ const tabBarConfiguration = {
     inactiveTintColor: 'gray',
 		showLabel: false,
   },
-	initialRouteName: 'TaskScreen',
+	// initialRouteName: 'TaskScreen',
 	lazy: false,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
