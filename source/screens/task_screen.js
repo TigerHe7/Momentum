@@ -13,7 +13,6 @@ import GoalCard from './../components/goal_card';
 import Time from './../util/time'
 
 const renderTaskCards = function({item}) {
-  console.log(item.index);
 	return (
 		<View	style={styles.taskCardContainer}>
 			<GoalCard
@@ -29,6 +28,13 @@ const renderTaskCards = function({item}) {
 }
 
 export default class MyComponent extends Component {
+
+	handleOnPress(func) {
+		requestAnimationFrame(() => {
+			func();
+		});
+	}
+
   render() {
 		const { state, actions } = this.props.screenProps;
 		const {startTask, pauseTask, finishTask} = { ...actions };
@@ -44,6 +50,7 @@ export default class MyComponent extends Component {
             {Time.getCurrentFormattedDate()}
           </Text>
         </View>
+				
         <View style={styles.divider}/>
 				<FlatList
 					style={styles.scrollview}
@@ -55,11 +62,15 @@ export default class MyComponent extends Component {
 							key: task.name,
               index: index,
               categoryColor: state.focusedTask.categories[task.category].color,
-              last: index === state.focusedTask.dailyTasks.length - 1,
 						}
 					})}
 					renderItem={({item}) => {return renderTaskCards.call(this, {item})}}>
 				</FlatList>
+				<View style={styles.addButtonContainer}>
+					<RoundedButton
+						title={'Add'}
+						onPress={() => {this.handleOnPress(() => {this.props.navigation.navigate("AddTaskScreen")})}}/>
+				</View>
       </View>
     );
   }
@@ -105,4 +116,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     opacity: 0.2,
   },
+	addButtonContainer: {
+		width: '100%',
+		height: 120,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });

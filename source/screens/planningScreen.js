@@ -9,19 +9,15 @@ import {
 } from 'react-native';
 import RoundedButton from './../components/rounded_button';
 import Colors from './../styles/colors';
-import GoalCard from './../components/goal_card';
+import SprintCard from './../components/sprint_card';
 import Time from './../util/time'
 
 const renderTaskCards = function({item}) {
 	return (
-		<View	style={styles.taskCardContainer}>
-			<GoalCard
+		<View	style={styles.cardContainer}>
+			<SprintCard
 				data={item}
-        categoryColor={item.categoryColor}
-				onPress={() => {this.props.navigation.navigate("FocusScreen", {
-          index: item.index,
-          categoryColor: item.categoryColor,
-        })}}/>
+				onPress={() => {}}/>
       <View style={styles.divider}/>
 		</View>
 	)
@@ -37,7 +33,7 @@ export default class PlanningScreen extends Component {
 				<StatusBar hidden={true} />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
-            {'Today'}
+            {'Your Sprints'}
           </Text>
           <Text style={styles.titleDate}>
             {Time.getCurrentFormattedDate()}
@@ -48,13 +44,11 @@ export default class PlanningScreen extends Component {
 					style={styles.scrollview}
 					alwaysBounceVertical={true}
 					overScrollMode='auto'
-					data={state.focusedTask.dailyTasks.map((task, index) => {
+					data={state.focusedTask.sprints.map((sprint, index) => {
 						return {
-							...task,
-							key: task.name,
+							...sprint,
+							key: sprint.start,
               index: index,
-              categoryColor: state.focusedTask.categories[task.category].color,
-              last: index === state.focusedTask.dailyTasks.length - 1,
 						}
 					})}
 					renderItem={({item}) => {return renderTaskCards.call(this, {item})}}>
@@ -94,7 +88,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: '100%',
 	},
-	taskCardContainer: {
+	cardContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

@@ -1,9 +1,8 @@
 import * as types from '../actions/actionTypes';
 import CategoryColors from '../styles/categoryColors';
+import Time from '../util/time';
 
 const initialState = {
-  // taskState: 'PAUSED',
-	taskTimeIntervals: [],
   categories: {
     Personal: {
       color: CategoryColors.indigo,
@@ -14,7 +13,20 @@ const initialState = {
     Health: {
       color: CategoryColors.yellow,
     },
+		Misc: {
+			color: CategoryColors.yellow,
+		},
   },
+	sprints: [
+		{
+			start: '1-2-2018',
+			end: '15-2-2018',
+		},
+		{
+			start: '1-3-2018',
+			end: '15-3-2018',
+		},
+	],
 	dailyTasks: [
 		{
 			name: 'Walk the dogs',

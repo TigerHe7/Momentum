@@ -115,4 +115,14 @@ Time.monthIndexToName = function(index) {
 	}
 }
 
+Time.formatFromDateStrings = function(date1, date2) {
+	const dateArray1 = date1.split('-');
+	const dateArray2 = date2.split('-');
+	const outputString = '';
+	if (dateArray1[1] === dateArray2[1]) {
+		return Time.monthIndexToName(parseInt(dateArray1[1])) + ' ' + dateArray1[0] + ' to ' + dateArray2[0];
+	}
+	return Time.monthIndexToName(parseInt(dateArray1[1])) + ' ' + dateArray1[0] + ' to ' + Time.monthIndexToName(parseInt(dateArray2[1])) + ' ' + dateArray2[0];
+}
+
 export default Time;

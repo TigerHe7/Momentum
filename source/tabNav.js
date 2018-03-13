@@ -50,7 +50,7 @@ const tabBarConfiguration = {
     inactiveTintColor: 'gray',
 		showLabel: false,
   },
-	// initialRouteName: 'TaskScreen',
+	initialRouteName: 'TaskScreen',
 	lazy: false,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
