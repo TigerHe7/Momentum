@@ -5,10 +5,10 @@ import {
   StyleSheet,
 	StatusBar,
 } from 'react-native';
-import RoundedButton from './../components/rounded_button';
-import Colors from './../styles/colors';
-import ProgressBar from  './../components/progress_bar';
-import CategoryIdentifier from './../components/category_identifier';
+import RoundedButton from './../../components/roundedButton';
+import Colors from './../../styles/colors';
+import ProgressBar from  './../../components/progressBar';
+import CategoryIdentifier from './../../components/categoryIdentifier';
 
 export default class MyComponent extends Component {
 	constructor(props) {

@@ -7,10 +7,10 @@ import {
 	ScrollView,
 	FlatList,
 } from 'react-native';
-import RoundedButton from './../components/rounded_button';
-import Colors from './../styles/colors';
-import GoalCard from './../components/goal_card';
-import Time from './../util/time'
+import RoundedButton from './../../components/roundedButton';
+import Colors from './../../styles/colors';
+import GoalCard from './../../components/goalCard';
+import Time from './../../util/time'
 
 const renderTaskCards = function({item}) {
 	return (
@@ -50,7 +50,7 @@ export default class MyComponent extends Component {
             {Time.getCurrentFormattedDate()}
           </Text>
         </View>
-				
+
         <View style={styles.divider}/>
 				<FlatList
 					style={styles.scrollview}

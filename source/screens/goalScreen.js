@@ -5,7 +5,7 @@ import {
   StyleSheet,
 	StatusBar,
 } from 'react-native';
-import RoundedButton from './../components/rounded_button';
+import RoundedButton from './../components/roundedButton';
 import Colors from './../styles/colors';
 
 export default class MyComponent extends Component {

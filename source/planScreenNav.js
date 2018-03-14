@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { StackNavigator} from 'react-navigation'
 import PlanningScreen from './screens/planningScreen';
-import TaskScreen from './screens/task_screen';
+import TaskScreen from './screens/todayScreens/taskScreen';
 
 const RouteConfigs = {
   PlanningScreen: {

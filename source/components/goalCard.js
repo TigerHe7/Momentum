@@ -11,7 +11,7 @@ const TouchableOpacity = require('TouchableOpacity');
 const View = require('View');
 
 import Colors from './../styles/colors';
-import CategoryIdentifier from './../components/category_identifier';
+import CategoryIdentifier from './../components/categoryIdentifier';
 import Time from './../util/time';
 
 class GoalCard extends React.Component<{

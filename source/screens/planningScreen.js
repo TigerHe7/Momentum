@@ -7,9 +7,9 @@ import {
 	ScrollView,
 	FlatList,
 } from 'react-native';
-import RoundedButton from './../components/rounded_button';
+import RoundedButton from './../components/roundedButton';
 import Colors from './../styles/colors';
-import SprintCard from './../components/sprint_card';
+import SprintCard from './../components/sprintCard';
 import Time from './../util/time'
 
 const renderTaskCards = function({item}) {

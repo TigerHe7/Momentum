@@ -14,9 +14,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import PlanningScreenNav from './planScreenNav';
 import TaskScreenNav from './taskScreenNav';
 
-import FocusScreen from './screens/focus_screen'
-import ProfileScreen from './screens/profile_screen';
-import GoalScreen from  './screens/goal_screen';
+import FocusScreen from './screens/todayScreens/focusScreen'
+import ProfileScreen from './screens/profileScreen';
+import GoalScreen from  './screens/goalScreen';
 
 const routeConfiguration = 	{
 		PlanningScreen: { screen: PlanningScreenNav},

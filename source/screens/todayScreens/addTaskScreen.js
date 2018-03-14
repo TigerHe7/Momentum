@@ -7,9 +7,9 @@ import {
 	TextInput,
 	Picker,
 } from 'react-native';
-import RoundedButton from './../components/rounded_button';
-import Colors from './../styles/colors';
-import Time from './../util/time'
+import RoundedButton from './../../components/roundedButton';
+import Colors from './../../styles/colors';
+import Time from './../../util/time'
 
 const generatePickerItems = function(categories) {
 		return Object.entries(categories).map((item) => {
@@ -47,6 +47,18 @@ export default class AddTaskScreen extends Component {
 					onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
 					{pickerItems}
 				</Picker>
+				<TextInput
+					placeholder={'Time estimate'}
+					style={styles.input}
+					autoCaptitalize={true}
+					multiline={false}
+					underlineColorAndroid='transparent'/>
+				<TextInput
+					placeholder={'Time estimate'}
+					style={styles.input}
+					autoCaptitalize={true}
+					multiline={false}
+					underlineColorAndroid='transparent'/>
       </View>
     );
   }

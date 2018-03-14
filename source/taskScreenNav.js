@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { StackNavigator} from 'react-navigation'
-import FocusScreen from './screens/focus_screen';
-import TaskScreen from './screens/task_screen';
-import AddTaskScreen from './screens/addTaskScreen';
+import FocusScreen from './screens/todayScreens/focusScreen';
+import TaskScreen from './screens/todayScreens/taskScreen';
+import AddTaskScreen from './screens/todayScreens/addTaskScreen';
 
 const RouteConfigs = {
   TaskScreen: {
