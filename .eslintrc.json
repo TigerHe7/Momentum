@@ -1,0 +1,32 @@
+{ 
+	"extends": "airbnb",
+	"rules": {
+		"linebreak-style": ["error", "windows"],
+	    "import/no-unresolved": "off",
+		"import/no-extraneous-dependencies": "off",
+		"no-use-before-define": "off",
+		"react-native/no-unused-styles": 2,
+		"react-native/split-platform-components": 2,
+		"react-native/no-inline-styles": 2,
+		"react-native/no-color-literals": 2,
+		"import/first": false
+    },
+	"settings": { "import/resolver": { "node": { "paths": ["src"] } } },
+	"plugins": [ "babel", "react", "react-native", "jsx-a11y" ],
+	"ecmaFeatures": {
+		"jsx": true
+	},
+	"env": {
+		"react-native/react-native": true
+	},
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+		  "jsx": true,
+		  "modules": true,
+		  "experimentalObjectRestSpread": true
+		}
+	}
+}
