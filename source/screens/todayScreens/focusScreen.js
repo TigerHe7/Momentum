@@ -5,6 +5,7 @@ import {
   StyleSheet,
 	StatusBar,
 } from 'react-native';
+import { NavigationActions } from 'react-navigation'
 import RoundedButton from './../../components/roundedButton';
 import Colors from './../../styles/colors';
 import ProgressBar from  './../../components/progressBar';
@@ -65,13 +66,16 @@ export default class MyComponent extends Component {
             color={buttonCenterColor}/>
 					<RoundedButton
 						title='Finish'
-						onPress={() => { finishTask(index) }}
+						onPress={() => {
+							finishTask(index);
+							this.props.navigation.dispatch(NavigationActions.back({ key: null }));
+						 	}}
 						color={Colors.buttonBackgroundFinish}/>
-					{/* <RoundedButton
-						title='Log'
+					<RoundedButton
+						title='Remove'
 						onPress={() => {
 						}}
-						color={Colors.buttonBackgroundLog}/> */}
+						color={Colors.buttonBackgroundLog}/>
 				</View>
 
       </View>

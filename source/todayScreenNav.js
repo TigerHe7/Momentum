@@ -31,4 +31,4 @@ const StackNavigatorConfig = {
 	mode: 'card',
 }
 
-export default TaskScreenNav = StackNavigator(RouteConfigs, StackNavigatorConfig);
+export default TodayScreenNav = StackNavigator(RouteConfigs, StackNavigatorConfig);

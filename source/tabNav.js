@@ -12,16 +12,14 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import PlanningScreenNav from './planScreenNav';
-import TaskScreenNav from './taskScreenNav';
+import TodayScreenNav from './todayScreenNav';
 
-import FocusScreen from './screens/todayScreens/focusScreen'
 import ProfileScreen from './screens/profileScreen';
 import GoalScreen from  './screens/goalScreen';
 
 const routeConfiguration = 	{
 		PlanningScreen: { screen: PlanningScreenNav},
-		TaskScreen: { screen: TaskScreenNav },
-		// FocusScreen: { screen: FocusScreen},
+		TodayScreenNav: { screen: TodayScreenNav },
 		GoalScreen: { screen: GoalScreen },
 };
 
@@ -50,7 +48,7 @@ const tabBarConfiguration = {
     inactiveTintColor: 'gray',
 		showLabel: false,
   },
-	initialRouteName: 'TaskScreen',
+	initialRouteName: 'TodayScreenNav',
 	lazy: false,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',

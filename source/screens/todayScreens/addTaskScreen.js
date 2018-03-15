@@ -13,7 +13,7 @@ import Time from './../../util/time'
 
 const generatePickerItems = function(categories) {
 		return Object.entries(categories).map((item) => {
-			return <Picker.Item label={item[0]} value="java" />
+			return <Picker.Item label={item[0]} value="java" />;
 		});
 }
 

@@ -1,24 +1,13 @@
-'use strict';
-
-const ColorPropType = require('ColorPropType');
-const Platform = require('Platform');
 const React = require('React');
-const PropTypes = require('prop-types');
 const StyleSheet = require('StyleSheet');
 const Text = require('Text');
-const TouchableNativeFeedback = require('TouchableNativeFeedback');
-const TouchableOpacity = require('TouchableOpacity');
 const View = require('View');
 
-import Colors from './../styles/colors';
-
-class CategoryIdentifier extends React.Component<{
-}> {
+class CategoryIdentifier extends React.Component {
   render() {
-
     const colorStyles = [styles.color];
     if (this.props.color) {
-      colorStyles.push({backgroundColor: this.props.color});
+      colorStyles.push({ backgroundColor: this.props.color });
     }
     if (this.props.dotSize) {
       colorStyles.push({
@@ -30,14 +19,14 @@ class CategoryIdentifier extends React.Component<{
 
     const textStyles = [styles.text];
     if (this.props.fontSize) {
-      textStyles.push({fontSize: this.props.fontSize});
+      textStyles.push({ fontSize: this.props.fontSize });
     }
 
     return (
-			<View style={styles.container}>
-        <View style={colorStyles}/>
+      <View style={styles.container}>
+        <View style={colorStyles} />
         <Text style={textStyles}>{this.props.children}</Text>
-			</View>
+      </View>
     );
   }
 }

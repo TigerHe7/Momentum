@@ -1,26 +1,16 @@
-'use strict';
-
-const ColorPropType = require('ColorPropType');
-const Platform = require('Platform');
 const React = require('React');
-const PropTypes = require('prop-types');
 const StyleSheet = require('StyleSheet');
 const Text = require('Text');
 const TouchableNativeFeedback = require('TouchableNativeFeedback');
-const TouchableOpacity = require('TouchableOpacity');
 const View = require('View');
 
-import Colors from './../styles/colors';
 import CategoryIdentifier from './../components/categoryIdentifier';
 import Time from './../util/time';
 
-class GoalCard extends React.Component<{
-  onPress: () => any,
-}> {
+class GoalCard extends React.Component {
   static propTypes = {
-    // data: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired,
-  };
+    count: React.PropTypes.number.isRequired
+  }
 
   handleOnPress(func) {
     requestAnimationFrame(() => {
@@ -44,7 +34,6 @@ class GoalCard extends React.Component<{
     // } else if (status === 'STARTED') {
     //   progress = 'in progress';
     // }
-
 
     return (
 			<TouchableNativeFeedback
