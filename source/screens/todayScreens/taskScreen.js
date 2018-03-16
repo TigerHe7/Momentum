@@ -3,45 +3,43 @@ import {
   View,
   Text,
   StyleSheet,
-	StatusBar,
-	ScrollView,
-	FlatList,
+  StatusBar,
+  FlatList,
 } from 'react-native';
 import RoundedButton from './../../components/roundedButton';
 import Colors from './../../styles/colors';
 import GoalCard from './../../components/goalCard';
-import Time from './../../util/time'
+import Time from './../../util/time';
 
-const renderTaskCards = function({item}) {
-	return (
-		<View	style={styles.taskCardContainer}>
-			<GoalCard
-				data={item}
+const renderTaskCards = ({ item }) => {
+  return (
+    <View style={styles.taskCardContainer}>
+      <GoalCard
+        data={item}
         categoryColor={item.categoryColor}
-				onPress={() => {this.props.navigation.navigate("FocusScreen", {
+        onPress={() => {
+          this.props.navigation.navigate('FocusScreen', {
           index: item.index,
           categoryColor: item.categoryColor,
-        })}}/>
-      <View style={styles.divider}/>
-		</View>
-	)
-}
+        });
+        }} />
+      <View style={styles.divider} />
+    </View>
+  );
+};
 
 export default class MyComponent extends Component {
-
-	handleOnPress(func) {
-		requestAnimationFrame(() => {
-			func();
-		});
-	}
+  handleOnPress(func) {
+    this.requestAnimationFrame(() => {
+      func();
+    });
+  }
 
   render() {
-		const { state, actions } = this.props.screenProps;
-		const {startTask, pauseTask, finishTask} = { ...actions };
-		const date = new Date();
+    const { state } = this.props.screenProps;
     return (
       <View style={styles.container}>
-				<StatusBar hidden={true} />
+        <StatusBar hidden />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {'Today'}
@@ -51,26 +49,25 @@ export default class MyComponent extends Component {
           </Text>
         </View>
 
-        <View style={styles.divider}/>
-				<FlatList
-					style={styles.scrollview}
-					alwaysBounceVertical={true}
-					overScrollMode='auto'
-					data={state.focusedTask.dailyTasks.map((task, index) => {
-						return {
-							...task,
-							key: task.name,
-              index: index,
+        <View style={styles.divider} />
+        <FlatList
+          style={styles.scrollview}
+          alwaysBounceVertical
+          overScrollMode="auto"
+          data={state.focusedTask.dailyTasks.map((task, index) => {
+            return {
+              ...task,
+              key: task.name,
+              index,
               categoryColor: state.focusedTask.categories[task.category].color,
-						}
-					})}
-					renderItem={({item}) => {return renderTaskCards.call(this, {item})}}>
-				</FlatList>
-				<View style={styles.addButtonContainer}>
-					<RoundedButton
-						title={'Add'}
-						onPress={() => {this.handleOnPress(() => {this.props.navigation.navigate("AddTaskScreen")})}}/>
-				</View>
+            };
+          })}
+          renderItem={({ item }) => { return renderTaskCards.call(this, { item }); }} />
+        <View style={styles.addButtonContainer}>
+          <RoundedButton
+            title="Add"
+            onPress={() => { this.handleOnPress(() => { this.props.navigation.navigate('AddTaskScreen'); }); }} />
+        </View>
       </View>
     );
   }
@@ -93,33 +90,33 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 10,
   },
-	title: {
-		fontSize: 18,
+  title: {
+    fontSize: 18,
     fontWeight: '500',
     marginRight: 10,
-	},
+  },
   titleDate: {
     fontSize: 16,
   },
-	scrollview: {
-		flex: 1,
-		width: '100%',
-		height: '100%',
-	},
-	taskCardContainer: {
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+  scrollview: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  taskCardContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   divider: {
     width: '100%',
     height: 0.8,
     backgroundColor: 'grey',
     opacity: 0.2,
   },
-	addButtonContainer: {
-		width: '100%',
-		height: 120,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
+  addButtonContainer: {
+    width: '100%',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

@@ -3,14 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
-	StatusBar,
+  StatusBar,
 } from 'react-native';
 
 export default class ProfileScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-				<StatusBar hidden={true} />
+        <StatusBar hidden />
         <Text>Im the MyComponent component</Text>
       </View>
     );

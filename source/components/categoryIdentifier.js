@@ -34,11 +34,11 @@ class CategoryIdentifier extends React.Component {
 const colorSize = 8;
 
 const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
+  container: {
+    flexDirection: 'row',
     justifyContent: 'flex-start',
-		alignItems: 'center',
-	},
+    alignItems: 'center',
+  },
   color: {
     height: colorSize,
     width: colorSize,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   text: {
-    fontSize: 12
+    fontSize: 12,
   },
 });
 

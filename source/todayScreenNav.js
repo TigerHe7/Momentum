@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { StackNavigator} from 'react-navigation'
+import { StackNavigator } from 'react-navigation';
 import FocusScreen from './screens/todayScreens/focusScreen';
 import TaskScreen from './screens/todayScreens/taskScreen';
 import AddTaskScreen from './screens/todayScreens/addTaskScreen';
@@ -8,27 +6,27 @@ import AddTaskScreen from './screens/todayScreens/addTaskScreen';
 const RouteConfigs = {
   TaskScreen: {
     screen: TaskScreen,
-    navigationOptions:({navigation}) => ({
+    navigationOptions: () => ({
       header: null,
-    })
+    }),
   },
   FocusScreen: {
     screen: FocusScreen,
-    navigationOptions: (props) => ({
+    navigationOptions: () => ({
       header: null,
-    })
+    }),
   },
-	AddTaskScreen: {
-		screen: AddTaskScreen,
-		navigationOptions: (props) => ({
-			header: null,
-		})
-	}
+  AddTaskScreen: {
+    screen: AddTaskScreen,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
 };
 
 const StackNavigatorConfig = {
   initialRouteName: 'TaskScreen',
-	mode: 'card',
-}
+  mode: 'card',
+};
 
-export default TodayScreenNav = StackNavigator(RouteConfigs, StackNavigatorConfig);
+export default StackNavigator(RouteConfigs, StackNavigatorConfig);

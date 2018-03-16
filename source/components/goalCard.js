@@ -8,27 +8,21 @@ import CategoryIdentifier from './../components/categoryIdentifier';
 import Time from './../util/time';
 
 class GoalCard extends React.Component {
-  static propTypes = {
-    count: React.PropTypes.number.isRequired
-  }
-
   handleOnPress(func) {
-    requestAnimationFrame(() => {
+    this.requestAnimationFrame(() => {
       func();
     });
   }
 
   render() {
-    const { onPress, data } = this.props;
-		const name = data.name;
-    const status = data.currentTaskState;
-    const category = data.category;
+    const { onPress, data, categoryColor } = this.props;
+    const { name, category } = data;
 
-    let time = data.timeEstimate * 60 - data.secondsSpent;
+    let time = (data.timeEstimate * 60) - data.secondsSpent;
     if (time < 0) time = 0;
     const timeString = Time.formatFromSeconds(time, true);
 
-    let progress = ' ';
+    const progress = ' ';
     // if (status === 'PAUSED' && data.secondsSpent > 0) {
     //   progress = 'paused';
     // } else if (status === 'STARTED') {
@@ -36,41 +30,41 @@ class GoalCard extends React.Component {
     // }
 
     return (
-			<TouchableNativeFeedback
-				style={styles.touchable}
-        useForeground={true}
+      <TouchableNativeFeedback
+        style={styles.touchable}
+        useForeground
         background={TouchableNativeFeedback.SelectableBackground()}
-				onPress={() => {this.handleOnPress(onPress)}}>
-				<View style={styles.container}>
-					<View style={styles.textContainer}>
-          	<Text style={styles.nameText}>{name}</Text>
-            <CategoryIdentifier color={this.props.categoryColor}>{category}</CategoryIdentifier>
-					</View>
+        onPress={() => { this.handleOnPress(onPress); }} >
+        <View style={styles.container}>
+          <View style={styles.textContainer}>
+            <Text style={styles.nameText}>{name}</Text>
+            <CategoryIdentifier color={categoryColor}>{category}</CategoryIdentifier>
+          </View>
           <View style={styles.statsContainer}>
             <Text style={styles.progressText}>{progress}</Text>
             <Text style={styles.text}>{timeString}</Text>
           </View>
-				</View>
-			</TouchableNativeFeedback>
+        </View>
+      </TouchableNativeFeedback>
     );
   }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: 85,
-		width: '100%',
-		flexDirection: 'row',
+  container: {
+    height: 85,
+    width: '100%',
+    flexDirection: 'row',
     justifyContent: 'center',
-		alignItems: 'center',
+    alignItems: 'center',
     padding: 16,
-	},
-	textContainer: {
-		height: '100%',
+  },
+  textContainer: {
+    height: '100%',
     width: '50%',
-		justifyContent: 'flex-start',
-		alignItems: 'flex-start',
-	},
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
   statsContainer: {
     height: '100%',
     width: '50%',
@@ -78,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   text: {
-		fontSize: 12,
+    fontSize: 12,
   },
   nameText: {
     fontSize: 16,

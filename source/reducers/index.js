@@ -1,5 +1,5 @@
 import focusedTask from './focusedTask';
 
-export {
-  focusedTask
+export default {
+  focusedTask,
 };

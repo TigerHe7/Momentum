@@ -3,16 +3,15 @@ import {
   View,
   Text,
   StyleSheet,
-	StatusBar,
+  StatusBar,
 } from 'react-native';
-import RoundedButton from './../components/roundedButton';
 import Colors from './../styles/colors';
 
 export default class MyComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-				<StatusBar hidden={true} />
+        <StatusBar hidden />
         <Text style={styles.task_title}>Goal Screen</Text>
       </View>
     );
@@ -26,28 +25,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.background,
   },
-	image_container: {
-		height: 200,
-		width: 200,
-		backgroundColor: Colors.imageBackground,
-		borderRadius: 100,
-		margin: 30,
-		elevation: 2,
-	},
-	buttons_container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		height: 40,
-		width: '60%',
-	},
   task_title: {
     fontSize: 20,
     textAlign: 'center',
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });

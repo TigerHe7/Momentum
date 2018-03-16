@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { StackNavigator} from 'react-navigation'
+import { StackNavigator } from 'react-navigation';
 import PlanningScreen from './screens/planningScreen';
-import TaskScreen from './screens/todayScreens/taskScreen';
 
 const RouteConfigs = {
   PlanningScreen: {
     screen: PlanningScreen,
-    navigationOptions:({navigation}) => ({
+    navigationOptions: () => ({
       header: null,
-    })
+    }),
   },
   // FocusScreen: {
   //   screen: FocusScreen,
@@ -21,6 +18,6 @@ const RouteConfigs = {
 
 const StackNavigatorConfig = {
   initialRouteName: 'PlanningScreen',
-}
+};
 
-export default PlanningScreenNav = StackNavigator(RouteConfigs, StackNavigatorConfig);
+export default StackNavigator(RouteConfigs, StackNavigatorConfig);

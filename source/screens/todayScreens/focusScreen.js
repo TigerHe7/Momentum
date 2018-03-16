@@ -3,40 +3,36 @@ import {
   View,
   Text,
   StyleSheet,
-	StatusBar,
+  StatusBar,
 } from 'react-native';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
 import RoundedButton from './../../components/roundedButton';
 import Colors from './../../styles/colors';
-import ProgressBar from  './../../components/progressBar';
+import ProgressBar from './../../components/progressBar';
 import CategoryIdentifier from './../../components/categoryIdentifier';
 
 export default class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-	}
-
   render() {
-		const { state, actions } = this.props.screenProps;
-		const {startTask, pauseTask, finishTask} = { ...actions };
+    const { state, actions } = this.props.screenProps;
+    const { startTask, pauseTask, finishTask } = { ...actions };
     const index = this.props.navigation.state.params.index;
     const categoryColor = this.props.navigation.state.params.categoryColor;
 
     const task = state.focusedTask.dailyTasks[index];
 
-		// center button props
-		let buttonCenterName = '';
-		let buttonCenterAction = () => {};
-		let buttonCenterColor = 'grey';
-		if (task.currentTaskState === 'STARTED') {
-			buttonCenterName = 'Pause';
-			buttonCenterAction = pauseTask;
-			buttonCenterColor = categoryColor; //Colors.buttonBackgroundPause;
-		} else if (task.currentTaskState === 'PAUSED' || task.currentTaskState === 'FINISHED') {
-			buttonCenterName = 'Start';
-			buttonCenterAction = startTask;
-			buttonCenterColor = Colors.buttonBackgroundStart;
-		}
+    // center button props
+    let buttonCenterName = '';
+    let buttonCenterAction = () => {};
+    let buttonCenterColor = 'grey';
+    if (task.currentTaskState === 'STARTED') {
+      buttonCenterName = 'Pause';
+      buttonCenterAction = pauseTask;
+      buttonCenterColor = categoryColor; // Colors.buttonBackgroundPause;
+    } else if (task.currentTaskState === 'PAUSED' || task.currentTaskState === 'FINISHED') {
+      buttonCenterName = 'Start';
+      buttonCenterAction = startTask;
+      buttonCenterColor = Colors.buttonBackgroundStart;
+    }
 
     const title = task.name;
     const maxTime = task.timeEstimate;
@@ -45,38 +41,39 @@ export default class MyComponent extends Component {
 
     return (
       <View style={styles.container}>
-				<StatusBar hidden={true} />
+        <StatusBar hidden />
 
         <Text style={styles.taskTitle}>{title}</Text>
         <CategoryIdentifier
           dotSize={10}
           fontSize={14}
-          color={categoryColor}>{category}</CategoryIdentifier>
+          color={categoryColor}>{category}
+        </CategoryIdentifier>
 
-				<View style={styles.progressBarContainer}>
-					<ProgressBar
-						taskTimeIntervals={taskTimeIntervals}
-						maxTime={maxTime}/>
-				</View>
+        <View style={styles.progressBarContainer}>
+          <ProgressBar
+            taskTimeIntervals={taskTimeIntervals}
+            maxTime={maxTime} />
+        </View>
 
-				<View style={styles.buttons_container}>
+        <View style={styles.buttons_container}>
           <RoundedButton
             title={buttonCenterName}
-            onPress={() => { buttonCenterAction(index) }}
-            color={buttonCenterColor}/>
-					<RoundedButton
-						title='Finish'
-						onPress={() => {
-							finishTask(index);
-							this.props.navigation.dispatch(NavigationActions.back({ key: null }));
-						 	}}
-						color={Colors.buttonBackgroundFinish}/>
-					<RoundedButton
-						title='Remove'
-						onPress={() => {
-						}}
-						color={Colors.buttonBackgroundLog}/>
-				</View>
+            onPress={() => { buttonCenterAction(index); }}
+            color={buttonCenterColor} />
+          <RoundedButton
+            title="Finish"
+            onPress={() => {
+              finishTask(index);
+              this.props.navigation.dispatch(NavigationActions.back({ key: null }));
+               }}
+            color={Colors.buttonBackgroundFinish} />
+          <RoundedButton
+            title="Remove"
+            onPress={() => {
+            }}
+            color={Colors.buttonBackgroundLog} />
+        </View>
 
       </View>
     );
@@ -90,30 +87,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.background,
   },
-	taskTitle: {
-		fontSize: 20,
-		textAlign: 'center',
+  taskTitle: {
+    fontSize: 20,
+    textAlign: 'center',
     marginBottom: 5,
-	},
-	image_container: {
-		height: 250,
-		width: 250,
-		backgroundColor: Colors.imageBackground,
-		borderRadius: 200,
-		margin: 30,
-		elevation: 2,
-	},
-	progressBarContainer: {
-		width: '75%',
-		height: 70,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	buttons_container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		marginTop: 8,
-		width: '75%',
-	},
+  },
+  progressBarContainer: {
+    width: '75%',
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttons_container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 8,
+    width: '75%',
+  },
 });

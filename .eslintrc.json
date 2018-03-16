@@ -1,15 +1,25 @@
-{ 
+{
 	"extends": "airbnb",
 	"rules": {
 		"linebreak-style": ["error", "windows"],
-	    "import/no-unresolved": "off",
+    "import/no-unresolved": "off",
 		"import/no-extraneous-dependencies": "off",
 		"no-use-before-define": "off",
 		"react-native/no-unused-styles": 2,
 		"react-native/split-platform-components": 2,
 		"react-native/no-inline-styles": 2,
 		"react-native/no-color-literals": 2,
-		"import/first": false
+		"import/first": false,
+		"react/jsx-filename-extension": 0,
+		"react/prefer-stateless-function": 0,
+		"react-native/no-color-literals": 0,
+		"react/forbid-prop-types": 0,
+		"react/jsx-closing-bracket-location": 0,
+		"max-len": 0,
+		"arrow-body-style": 0,
+		"react/prop-types": 0,
+		"prefer-destructuring": 0,
+		"radix": 0
     },
 	"settings": { "import/resolver": { "node": { "paths": ["src"] } } },
 	"plugins": [ "babel", "react", "react-native", "jsx-a11y" ],
