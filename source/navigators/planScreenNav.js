@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation';
-import PlanningScreen from './screens/planningScreen';
+import PlanningScreen from './../screens/planningScreen';
 
 const RouteConfigs = {
   PlanningScreen: {

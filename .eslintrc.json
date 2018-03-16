@@ -1,8 +1,8 @@
 {
 	"extends": "airbnb",
 	"rules": {
-		"linebreak-style": ["error", "windows"],
-    "import/no-unresolved": "off",
+		"linebreak-style": 0,
+		"import/no-unresolved": "off",
 		"import/no-extraneous-dependencies": "off",
 		"no-use-before-define": "off",
 		"react-native/no-unused-styles": 2,
@@ -19,7 +19,8 @@
 		"arrow-body-style": 0,
 		"react/prop-types": 0,
 		"prefer-destructuring": 0,
-		"radix": 0
+		"radix": 0,
+    "import/no-duplicates": 0
     },
 	"settings": { "import/resolver": { "node": { "paths": ["src"] } } },
 	"plugins": [ "babel", "react", "react-native", "jsx-a11y" ],

@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation';
-import FocusScreen from './screens/todayScreens/focusScreen';
-import TaskScreen from './screens/todayScreens/taskScreen';
-import AddTaskScreen from './screens/todayScreens/addTaskScreen';
+import FocusScreen from './../screens/todayScreens/focusScreen';
+import TaskScreen from './../screens/todayScreens/taskScreen';
+import AddTaskScreen from './../screens/todayScreens/addTaskScreen';
 
 const RouteConfigs = {
   TaskScreen: {

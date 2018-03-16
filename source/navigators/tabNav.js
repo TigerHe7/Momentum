@@ -8,9 +8,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import PlanningScreenNav from './planScreenNav';
 import TodayScreenNav from './todayScreenNav';
 
-import GoalScreen from './screens/goalScreen';
+import GoalScreen from './../screens/goalScreen';
 
-import Colors from './styles/colors';
+import Colors from './../styles/colors';
 
 const routeConfiguration = {
   PlanningScreen: { screen: PlanningScreenNav },
