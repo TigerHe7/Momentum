@@ -10,18 +10,18 @@ import Colors from './../styles/colors';
 import SprintCard from './../components/sprintCard';
 import Time from './../util/time';
 
-const renderTaskCards = ({ item }) => {
-  return (
-    <View style={styles.cardContainer}>
-      <SprintCard
-        data={item}
-        onPress={() => {}} />
-      <View style={styles.divider} />
-    </View>
-  );
-};
-
 export default class PlanningScreen extends Component {
+  renderTaskCards({ item }) {
+    return (
+      <View style={styles.cardContainer}>
+        <SprintCard
+          data={item}
+          onPress={() => {}} />
+        <View style={styles.divider} />
+      </View>
+    );
+  }
+
   render() {
     const { state } = this.props.screenProps;
     return (
@@ -47,7 +47,7 @@ export default class PlanningScreen extends Component {
               index,
             };
           })}
-          renderItem={({ item }) => { return renderTaskCards.call(this, { item }); }} />
+          renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
       </View>
     );
   }

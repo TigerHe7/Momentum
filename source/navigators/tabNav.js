@@ -26,12 +26,9 @@ const tabBarConfiguration = {
       if (routeName === 'GoalScreen') {
         iconName = 'circular-graph';
         return <Entypo name={iconName} size={25} color={tintColor} />;
-      } else if (routeName === 'FocusScreen') {
+      } else if (routeName === 'TodayScreenNav') {
         iconName = 'flame';
         return <Octicons name={iconName} size={25} color={tintColor} />;
-      } else if (routeName === 'TaskScreen') {
-        iconName = 'calendar-text';
-        return <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />;
       } else if (routeName === 'PlanningScreen') {
         iconName = 'calendar-text';
         return <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />;

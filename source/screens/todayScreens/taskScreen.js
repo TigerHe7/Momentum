@@ -11,28 +11,28 @@ import Colors from './../../styles/colors';
 import GoalCard from './../../components/goalCard';
 import Time from './../../util/time';
 
-const renderTaskCards = ({ item }) => {
-  return (
-    <View style={styles.taskCardContainer}>
-      <GoalCard
-        data={item}
-        categoryColor={item.categoryColor}
-        onPress={() => {
-          this.props.navigation.navigate('FocusScreen', {
-          index: item.index,
-          categoryColor: item.categoryColor,
-        });
-        }} />
-      <View style={styles.divider} />
-    </View>
-  );
-};
-
 export default class MyComponent extends Component {
   addTask() {
     requestAnimationFrame(() => {
       this.props.navigation.navigate('AddTaskScreen');
     });
+  }
+
+  renderTaskCards({ item }) {
+    return (
+      <View style={styles.taskCardContainer}>
+        <GoalCard
+          data={item}
+          categoryColor={item.categoryColor}
+          onPress={() => {
+            this.props.navigation.navigate('FocusScreen', {
+            index: item.index,
+            categoryColor: item.categoryColor,
+          });
+          }} />
+        <View style={styles.divider} />
+      </View>
+    );
   }
 
   render() {
@@ -62,7 +62,7 @@ export default class MyComponent extends Component {
               categoryColor: state.focusedTask.categories[task.category].color,
             };
           })}
-          renderItem={({ item }) => { return renderTaskCards.call(this, { item }); }} />
+          renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
         <View style={styles.addButtonContainer}>
           <RoundedButton
             title="Add"

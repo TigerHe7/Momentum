@@ -9,7 +9,7 @@ import Time from './../util/time';
 
 class GoalCard extends React.Component {
   handleOnPress(func) {
-    this.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       func();
     });
   }

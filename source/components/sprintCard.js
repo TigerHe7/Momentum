@@ -10,7 +10,7 @@ class GoalCard extends React.Component<{
   onPress: () => any,
 }> {
   handleOnPress(func) {
-    this.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       func();
     });
   }
