@@ -21,7 +21,8 @@
 		"prefer-destructuring": 0,
 		"radix": 0,
 		"import/no-duplicates": 0,
-		"class-methods-use-this": 0
+		"class-methods-use-this": 0,
+		"no-alert": 0
     },
 	"settings": { "import/resolver": { "node": { "paths": ["src"] } } },
 	"plugins": [ "babel", "react", "react-native", "jsx-a11y" ],

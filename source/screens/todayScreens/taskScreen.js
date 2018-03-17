@@ -9,9 +9,14 @@ import {
 import RoundedButton from './../../components/roundedButton';
 import Colors from './../../styles/colors';
 import GoalCard from './../../components/goalCard';
+import AddTaskModal from './../../components/addTaskModal';
 import Time from './../../util/time';
 
 export default class MyComponent extends Component {
+  state = {
+    modalVisible: false,
+  };
+
   addTask() {
     requestAnimationFrame(() => {
       this.props.navigation.navigate('AddTaskScreen');
@@ -40,6 +45,9 @@ export default class MyComponent extends Component {
     return (
       <View style={styles.container}>
         <StatusBar hidden />
+        <AddTaskModal
+          visible={this.state.modalVisible}
+          changeVisibility={() => { this.setState({ modalVisible: !this.state.modalVisible }); }} />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {'Today'}
@@ -48,7 +56,6 @@ export default class MyComponent extends Component {
             {Time.getCurrentFormattedDate()}
           </Text>
         </View>
-
         <View style={styles.divider} />
         <FlatList
           style={styles.scrollview}
@@ -66,7 +73,10 @@ export default class MyComponent extends Component {
         <View style={styles.addButtonContainer}>
           <RoundedButton
             title="Add"
-            onPress={() => { this.addTask(); }} />
+            onPress={() => {
+              this.setState({ modalVisible: !this.state.modalVisible });
+              // this.addTask();
+             }} />
         </View>
       </View>
     );
