@@ -18,7 +18,7 @@ class RoundedButton extends React.Component {
   }
 
   handleOnPress(func) {
-    this.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       func();
     });
   }
@@ -40,8 +40,7 @@ class RoundedButton extends React.Component {
           onPressIn={() => { this.setState({ viewStyles: { width: '95%', height: '95%' } }); }}
           onPressOut={() => { this.setState({ viewStyles: { width: '100%', height: '100%' } }); }}
           onPress={() => { this.handleOnPress(onPress); }}
-          activeOpacity={1}
-        >
+          activeOpacity={1}>
           <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
       </View>

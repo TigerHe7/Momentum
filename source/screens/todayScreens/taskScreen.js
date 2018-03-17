@@ -29,9 +29,9 @@ const renderTaskCards = ({ item }) => {
 };
 
 export default class MyComponent extends Component {
-  handleOnPress(func) {
-    this.requestAnimationFrame(() => {
-      func();
+  addTask() {
+    requestAnimationFrame(() => {
+      this.props.navigation.navigate('AddTaskScreen');
     });
   }
 
@@ -66,7 +66,7 @@ export default class MyComponent extends Component {
         <View style={styles.addButtonContainer}>
           <RoundedButton
             title="Add"
-            onPress={() => { this.handleOnPress(() => { this.props.navigation.navigate('AddTaskScreen'); }); }} />
+            onPress={() => { this.addTask(); }} />
         </View>
       </View>
     );
