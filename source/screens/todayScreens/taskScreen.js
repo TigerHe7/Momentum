@@ -5,8 +5,9 @@ import {
   StyleSheet,
   StatusBar,
   FlatList,
+  Keyboard,
 } from 'react-native';
-import RoundedButton from './../../components/roundedButton';
+import CircleButton from './../../components/circleButton';
 import Colors from './../../styles/colors';
 import GoalCard from './../../components/goalCard';
 import AddTaskModal from './../../components/addTaskModal';
@@ -15,7 +16,26 @@ import Time from './../../util/time';
 export default class MyComponent extends Component {
   state = {
     modalVisible: false,
+    keyboardHeight: 0,
   };
+
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardShow.bind(this));
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardHide.bind(this));
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  onKeyboardShow(event) {
+    this.setState({ keyboardHeight: event.endCoordinates.height });
+  }
+
+  onKeyboardHide() {
+    this.setState({ modalVisible: false });
+  }
 
   addTask() {
     requestAnimationFrame(() => {
@@ -47,6 +67,7 @@ export default class MyComponent extends Component {
         <StatusBar hidden />
         <AddTaskModal
           visible={this.state.modalVisible}
+          keyboardHeight={this.state.keyboardHeight}
           changeVisibility={() => { this.setState({ modalVisible: !this.state.modalVisible }); }} />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
@@ -70,14 +91,16 @@ export default class MyComponent extends Component {
             };
           })}
           renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
-        <View style={styles.addButtonContainer}>
-          <RoundedButton
+        {/* <View style={styles.addButtonContainer}> */}
+        { !this.state.modalVisible &&
+          <CircleButton
             title="Add"
+            style={styles.addButton}
             onPress={() => {
               this.setState({ modalVisible: !this.state.modalVisible });
               // this.addTask();
-             }} />
-        </View>
+             }} />}
+        {/* </View> */}
       </View>
     );
   }
@@ -87,26 +110,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     backgroundColor: Colors.background,
   },
   titleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
     height: 25,
     width: '100%',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     paddingHorizontal: 16,
     marginTop: 50,
     marginBottom: 10,
   },
   title: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '500',
-    marginRight: 10,
+    marginBottom: 0,
   },
   titleDate: {
-    fontSize: 16,
+    fontSize: 14,
   },
   scrollview: {
     flex: 1,
@@ -123,10 +146,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     opacity: 0.2,
   },
-  addButtonContainer: {
-    width: '100%',
-    height: 120,
-    alignItems: 'center',
-    justifyContent: 'center',
+  addButton: {
+    position: 'absolute',
+    right: 35,
+    bottom: 25,
+    zIndex: 1,
   },
 });

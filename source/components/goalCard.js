@@ -23,11 +23,6 @@ class GoalCard extends React.Component {
     const timeString = Time.formatFromSeconds(time, true);
 
     const progress = ' ';
-    // if (status === 'PAUSED' && data.secondsSpent > 0) {
-    //   progress = 'paused';
-    // } else if (status === 'STARTED') {
-    //   progress = 'in progress';
-    // }
 
     return (
       <TouchableNativeFeedback
