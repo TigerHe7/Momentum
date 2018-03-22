@@ -71,11 +71,11 @@ export default class MyComponent extends Component {
               this.props.navigation.dispatch(NavigationActions.back({ key: null }));
                }}
             color={Colors.buttonBackgroundFinish} />
-          <RoundedButton
+          {/* <RoundedButton
             title="Remove"
             onPress={() => {
             }}
-            color={Colors.buttonBackgroundLog} />
+            color={Colors.buttonBackgroundLog} /> */}
         </View>
 
       </View>

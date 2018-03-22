@@ -8,8 +8,6 @@ const TextInput = require('TextInput');
 
 import Colors from './../styles/colors';
 
-const colorSize = 8;
-
 class AddTaskModal extends React.Component {
   state = {
   }
@@ -17,7 +15,6 @@ class AddTaskModal extends React.Component {
   render() {
     const { visible, changeVisibility, keyboardHeight } = this.props;
     const cardStyle = [styles.view, { marginBottom: 0 }];
-    console.log(`keyboardHeight ${keyboardHeight}`);
     return (
       <Modal
         animationType="fade"
@@ -28,6 +25,41 @@ class AddTaskModal extends React.Component {
           <StatusBar hidden />
           {visible &&
             <View style={cardStyle}>
+              <View style={styles.buttonContainer}>
+                <TextInput
+                  placeholder="Category"
+                  style={styles.inputCategory}
+                  autoCaptitalize
+                  autoFocus
+                  multiline={false}
+                  underlineColorAndroid="transparent"
+                  onSubmitEditing={() => {
+                      this.categoryInput.focus();
+                    }} />
+                <View style={styles.verticalDivider} />
+                <TextInput
+                  placeholder="Category"
+                  style={styles.inputCategory}
+                  autoCaptitalize
+                  autoFocus
+                  multiline={false}
+                  underlineColorAndroid="transparent"
+                  onSubmitEditing={() => {
+                      this.categoryInput.focus();
+                    }} />
+                <View style={styles.verticalDivider} />
+                <TextInput
+                  placeholder="Category"
+                  style={styles.inputCategory}
+                  autoCaptitalize
+                  autoFocus
+                  multiline={false}
+                  underlineColorAndroid="transparent"
+                  onSubmitEditing={() => {
+                      this.categoryInput.focus();
+                    }} />
+              </View>
+              <View style={styles.divider} />
               <View style={styles.inputContainer}>
                 <TextInput
                   placeholder="Your next task"
@@ -39,9 +71,6 @@ class AddTaskModal extends React.Component {
                   onSubmitEditing={() => {
                       this.categoryInput.focus();
                     }} />
-              </View>
-              <View style={styles.divider} />
-              <View style={styles.buttonContainer}>
               </View>
             </View> }
         </View>
@@ -84,6 +113,18 @@ const styles = StyleSheet.create({
   buttonContainer: {
     height: 40,
     flexDirection: 'row',
+    paddingLeft: 16,
+  },
+  verticalDivider: {
+    height: '100%',
+    width: 0.8,
+    backgroundColor: 'grey',
+    opacity: 0.2,
+  },
+  inputCategory: {
+    fontSize: 12,
+    width: '33%',
+    color: '#808080',
   },
   divider: {
     width: '100%',

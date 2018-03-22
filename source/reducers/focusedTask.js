@@ -112,6 +112,21 @@ export default function focusedTask(state = initialState, action = {}) {
           return task;
         }),
       };
+    case types.ADD_TASK:
+      return {
+        ...state,
+        dailyTasks: state.dailyTasks.concat[{ ...action.data }], // idk if this spread is necessary
+      };
+    case types.REMOVE_TASK:
+      return {
+        ...state,
+        dailyTasks: state.dailyTasks.filter((task, index) => {
+          if (index === action.index) {
+            return false;
+          }
+          return true;
+        }),
+      };
     default:
       return state;
   }

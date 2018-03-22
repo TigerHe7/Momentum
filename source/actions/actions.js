@@ -20,3 +20,17 @@ export function finishTask(index) {
     index,
   };
 }
+
+export function addTask(data) {
+  return {
+    type: types.ADD_TASK,
+    data,
+  };
+}
+
+export function removeTask(index) {
+  return {
+    type: types.REMOVE_TASK,
+    index,
+  };
+}
