@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
     borderRadius: 60,
   },
   text: {
+    position: 'absolute',
     color: Colors.textLight,
     textAlign: 'center',
     fontWeight: '200',
-    fontSize: 14,
+    fontSize: 20,
   },
 });
 

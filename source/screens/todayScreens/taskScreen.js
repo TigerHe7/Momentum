@@ -91,16 +91,15 @@ export default class MyComponent extends Component {
             };
           })}
           renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
-        {/* <View style={styles.addButtonContainer}> */}
         { !this.state.modalVisible &&
           <CircleButton
-            title="Add"
+            title="+"
             style={styles.addButton}
+            color={Colors.addButton}
             onPress={() => {
               this.setState({ modalVisible: !this.state.modalVisible });
               // this.addTask();
              }} />}
-        {/* </View> */}
       </View>
     );
   }

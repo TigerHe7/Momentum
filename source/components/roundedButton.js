@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   touchable: {
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 4,
+    elevation: 2,
     backgroundColor: 'grey',
     borderRadius: 24,
     width: 85,

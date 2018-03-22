@@ -43,17 +43,20 @@ export default class MyComponent extends Component {
       <View style={styles.container}>
         <StatusBar hidden />
 
-        <Text style={styles.taskTitle}>{title}</Text>
-        <CategoryIdentifier
-          dotSize={10}
-          fontSize={14}
-          color={categoryColor}>{category}
-        </CategoryIdentifier>
+        <View style={styles.titleContainer}>
+          <Text style={styles.taskTitle}>{title}</Text>
+          <CategoryIdentifier
+            dotSize={10}
+            fontSize={14}
+            color={categoryColor}>{category}
+          </CategoryIdentifier>
+        </View>
 
         <View style={styles.progressBarContainer}>
           <ProgressBar
             taskTimeIntervals={taskTimeIntervals}
             maxTime={maxTime} />
+          <View style={styles.descriptionContainer} />
         </View>
 
         <View style={styles.buttons_container}>
@@ -83,26 +86,36 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 50,
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     backgroundColor: Colors.background,
   },
+  titleContainer: {
+  },
   taskTitle: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: '500',
     textAlign: 'center',
     marginBottom: 5,
   },
   progressBarContainer: {
-    width: '75%',
-    height: 70,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '80%',
   },
   buttons_container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 8,
-    width: '75%',
+    width: '100%',
+  },
+  descriptionContainer: {
+    marginTop: 20,
+    backgroundColor: Colors.descriptionContainer,
+    height: '80%',
+    width: '100%',
+    borderRadius: 10,
   },
 });
