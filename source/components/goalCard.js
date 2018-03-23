@@ -15,7 +15,12 @@ class GoalCard extends React.Component {
   }
 
   render() {
-    const { onPress, data, categoryColor } = this.props;
+    const {
+      onPress,
+      data,
+      categoryColor,
+      removeTaskAction,
+    } = this.props;
     const { name, category } = data;
 
     let time = (data.timeEstimate * 60) - data.secondsSpent;
@@ -28,6 +33,7 @@ class GoalCard extends React.Component {
       <TouchableNativeFeedback
         style={styles.touchable}
         useForeground
+        onLongPress={removeTaskAction}
         background={TouchableNativeFeedback.SelectableBackground()}
         onPress={() => { this.handleOnPress(onPress); }} >
         <View style={styles.container}>

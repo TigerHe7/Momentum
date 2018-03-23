@@ -48,6 +48,7 @@ export default class MyComponent extends Component {
       <View style={styles.taskCardContainer}>
         <GoalCard
           data={item}
+          removeTaskAction={() => this.props.screenProps.actions.removeTask(item.index)}
           categoryColor={item.categoryColor}
           onPress={() => {
             this.props.navigation.navigate('FocusScreen', {
