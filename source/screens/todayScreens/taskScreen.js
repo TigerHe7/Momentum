@@ -102,7 +102,7 @@ export default class MyComponent extends Component {
             color={Colors.addButton}
             onPress={() => {
               this.setState({ modalVisible: !this.state.modalVisible });
-             }} />}
+            }} />}
       </View>
     );
   }
@@ -110,7 +110,8 @@ export default class MyComponent extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
+    width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
     backgroundColor: Colors.background,
@@ -135,8 +136,9 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     width: '100%',
-    height: '100%',
+    height: '120%',
     zIndex: 0,
+    flex: 0,
   },
   taskCardContainer: {
     justifyContent: 'center',
@@ -148,10 +150,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     opacity: 0.2,
   },
+  // addButtonContainer: {
+  //   position: 'absolute',
+  //   zIndex: 2,
+  //   height: '100%',
+  //   width: '100%',
+  //   right: 0,
+  //   bottom: 0,
+  // },
   addButton: {
     position: 'absolute',
+    alignSelf: 'flex-end',
     right: 35,
     bottom: 25,
-    zIndex: 10,
+    zIndex: 12,
   },
 });
