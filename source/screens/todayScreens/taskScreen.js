@@ -61,13 +61,17 @@ export default class MyComponent extends Component {
   }
 
   render() {
-    const { state } = this.props.screenProps;
+    const { state, actions } = this.props.screenProps;
+    const { addTask } = { ...actions };
+    const categories = state.focusedTask.categories;
     return (
       <View style={styles.container}>
         <StatusBar hidden />
         <AddTaskModal
           visible={this.state.modalVisible}
+          categories={categories}
           keyboardHeight={this.state.keyboardHeight}
+          addTaskAction={addTask}
           changeVisibility={() => { this.setState({ modalVisible: !this.state.modalVisible }); }} />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
@@ -98,7 +102,6 @@ export default class MyComponent extends Component {
             color={Colors.addButton}
             onPress={() => {
               this.setState({ modalVisible: !this.state.modalVisible });
-              // this.addTask();
              }} />}
       </View>
     );
@@ -131,9 +134,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   scrollview: {
-    flex: 1,
     width: '100%',
     height: '100%',
+    zIndex: 0,
   },
   taskCardContainer: {
     justifyContent: 'center',
@@ -149,6 +152,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 35,
     bottom: 25,
-    zIndex: 1,
+    zIndex: 10,
   },
 });

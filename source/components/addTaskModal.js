@@ -8,16 +8,44 @@ const TextInput = require('TextInput');
 
 import Colors from './../styles/colors';
 
+const colorSize = 8;
+
+const testingInitialState = {
+  categoryColor: 'grey',
+  taskName: 'Eat food',
+  category: 'Personal',
+  startingTime: 'Now',
+  timeEstimate: '182',
+};
+
+const initialState = testingInitialState;
+// = {
+//   categoryColor: 'grey',
+//   taskName: '',
+//   category: '',
+//   startingTime: '',
+//   timeEstimate: '',
+// };
+
 class AddTaskModal extends React.Component {
-  state = {
-  }
+  state = initialState;
 
   render() {
-    const { visible, changeVisibility, keyboardHeight } = this.props;
+    const {
+      visible,
+      changeVisibility,
+      keyboardHeight,
+      categories,
+      addTaskAction,
+    } = this.props;
     const cardStyle = [styles.view, { marginBottom: 0 }];
+    const colorStyle = [styles.color, { backgroundColor: this.state.categoryColor }];
     return (
       <Modal
         animationType="fade"
+        onShow={() => {
+          this.nameInput.focus();
+        }}
         transparent
         visible={visible}
         onRequestClose={changeVisibility}>
@@ -26,38 +54,74 @@ class AddTaskModal extends React.Component {
           {visible &&
             <View style={cardStyle}>
               <View style={styles.buttonContainer}>
-                <TextInput
-                  placeholder="Category"
-                  style={styles.inputCategory}
-                  autoCaptitalize
-                  autoFocus
-                  multiline={false}
-                  underlineColorAndroid="transparent"
-                  onSubmitEditing={() => {
-                      this.categoryInput.focus();
-                    }} />
+                <View style={styles.singleButtonContainer}>
+                  <View style={colorStyle} />
+                  <TextInput
+                    placeholder="Category"
+                    ref={(c) => { this.categoryInput = c; }}
+                    style={styles.inputCategory}
+                    autoCaptitalize
+                    blurOnSubmit={false}
+                    multiline={false}
+                    value={this.state.category}
+                    onChangeText={(category) => {
+                      if (categories[category]) {
+                        this.setState({
+                          categoryColor: categories[category].color,
+                          category,
+                        });
+                      } else {
+                        this.setState({ category });
+                      }
+                    }}
+                    underlineColorAndroid="transparent"
+                    onSubmitEditing={() => {
+                        this.startingTimeInput.focus();
+                      }} />
+                </View>
                 <View style={styles.verticalDivider} />
-                <TextInput
-                  placeholder="Category"
-                  style={styles.inputCategory}
-                  autoCaptitalize
-                  autoFocus
-                  multiline={false}
-                  underlineColorAndroid="transparent"
-                  onSubmitEditing={() => {
-                      this.categoryInput.focus();
-                    }} />
+                <View style={styles.singleButtonContainer}>
+                  <TextInput
+                    placeholder="Starting time"
+                    ref={(c) => { this.startingTimeInput = c; }}
+                    style={styles.inputCategory}
+                    autoCaptitalize
+                    blurOnSubmit={false}
+                    multiline={false}
+                    value={this.state.startingTime}
+                    onChangeText={(startingTime) => {
+                      this.setState({ startingTime });
+                    }}
+                    underlineColorAndroid="transparent"
+                    onSubmitEditing={() => {
+                        this.timeEstimateInput.focus();
+                      }} />
+                </View>
                 <View style={styles.verticalDivider} />
-                <TextInput
-                  placeholder="Category"
-                  style={styles.inputCategory}
-                  autoCaptitalize
-                  autoFocus
-                  multiline={false}
-                  underlineColorAndroid="transparent"
-                  onSubmitEditing={() => {
-                      this.categoryInput.focus();
-                    }} />
+                <View style={styles.singleButtonContainer}>
+                  <TextInput
+                    placeholder="Time estimate"
+                    ref={(c) => { this.timeEstimateInput = c; }}
+                    style={styles.inputCategory}
+                    autoCaptitalize
+                    // blurOnSubmit={false}
+                    multiline={false}
+                    value={this.state.timeEstimate}
+                    onChangeText={timeEstimate => this.setState({ timeEstimate })}
+                    underlineColorAndroid="transparent"
+                    onSubmitEditing={() => {
+                        addTaskAction({
+                          name: this.state.taskName,
+                          category: this.state.category,
+                          secondsSpent: 0,
+                          timeEstimate: Number(this.state.timeEstimate),
+                          taskTimeIntervals: [],
+                          currentTaskState: 'PAUSED',
+                        });
+                        this.setState({ ...initialState });
+                        // this.nameInput.focus();
+                      }} />
+                </View>
               </View>
               <View style={styles.divider} />
               <View style={styles.inputContainer}>
@@ -65,8 +129,12 @@ class AddTaskModal extends React.Component {
                   placeholder="Your next task"
                   style={styles.inputName}
                   autoCaptitalize
+                  ref={(c) => { this.nameInput = c; }}
                   autoFocus
+                  blurOnSubmit={false}
                   multiline={false}
+                  value={this.state.taskName}
+                  onChangeText={taskName => this.setState({ taskName })}
                   underlineColorAndroid="transparent"
                   onSubmitEditing={() => {
                       this.categoryInput.focus();
@@ -113,7 +181,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     height: 40,
     flexDirection: 'row',
-    paddingLeft: 16,
+    // marginLeft: 16,
+    justifyContent: 'space-between',
   },
   verticalDivider: {
     height: '100%',
@@ -121,16 +190,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     opacity: 0.2,
   },
+  singleButtonContainer: {
+    width: '33%',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   inputCategory: {
     fontSize: 12,
-    width: '33%',
+    width: '100%',
     color: '#808080',
+    marginLeft: 5,
   },
   divider: {
     width: '100%',
     height: 0.8,
     backgroundColor: 'grey',
     opacity: 0.2,
+  },
+  color: {
+    height: colorSize,
+    width: colorSize,
+    borderRadius: colorSize,
+    marginLeft: 16,
   },
 });
 

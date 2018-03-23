@@ -113,9 +113,11 @@ export default function focusedTask(state = initialState, action = {}) {
         }),
       };
     case types.ADD_TASK:
+      console.log(JSON.stringify(state.dailyTasks.concat[{ ...action.data }]));
+      console.log(JSON.stringify(action.data));
       return {
         ...state,
-        dailyTasks: state.dailyTasks.concat[{ ...action.data }], // idk if this spread is necessary
+        dailyTasks: state.dailyTasks.concat([action.data]), // idk if this spread is necessary
       };
     case types.REMOVE_TASK:
       return {
