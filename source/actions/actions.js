@@ -34,3 +34,16 @@ export function removeTask(index) {
     index,
   };
 }
+
+export function setFullState(state) {
+  return {
+    type: types.SET_FULL_STATE,
+    state,
+  };
+}
+
+export function setDefaultState() {
+  return {
+    type: types.SET_DEFAULT_STATE,
+  };
+}

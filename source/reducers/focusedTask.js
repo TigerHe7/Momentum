@@ -113,8 +113,6 @@ export default function focusedTask(state = initialState, action = {}) {
         }),
       };
     case types.ADD_TASK:
-      console.log(JSON.stringify(state.dailyTasks.concat[{ ...action.data }]));
-      console.log(JSON.stringify(action.data));
       return {
         ...state,
         dailyTasks: state.dailyTasks.concat([action.data]), // idk if this spread is necessary
@@ -128,6 +126,14 @@ export default function focusedTask(state = initialState, action = {}) {
           }
           return true;
         }),
+      };
+    case types.SET_FULL_STATE:
+      return {
+        ...action.state,
+      };
+    case types.SET_DEFAULT_STATE:
+      return {
+        ...initialState,
       };
     default:
       return state;
