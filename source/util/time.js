@@ -62,6 +62,11 @@ Time.getCurrentFormattedDate = () => {
   return `${Time.monthIndexToName(date.getMonth())} ${date.getDate()}`;
 };
 
+Time.getCurrentDateString = () => {
+  const date = new Date();
+  return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+};
+
 Time.dayIndexToName = (index) => {
   switch (index) {
     case 0:
@@ -121,7 +126,12 @@ Time.formatFromDateStrings = (date1, date2) => {
     return `${Time.monthIndexToName(parseInt(dateArray1[1]))} ${dateArray1[0]} to ${dateArray2[0]}`;
   }
   return `${Time.monthIndexToName(parseInt(dateArray1[1]))} ${dateArray1[0]} to
-   ${Time.monthIndexToName(parseInt(dateArray2[1]))} ${dateArray2[0]}`;
+    ${Time.monthIndexToName(parseInt(dateArray2[1]))} ${dateArray2[0]}`;
+};
+
+Time.formatFromDateString = (date1) => {
+  const dateArray1 = date1.split('-');
+  return `${Time.monthIndexToName(parseInt(dateArray1[1]))} ${dateArray1[0]}, ${dateArray1[2]}`;
 };
 
 export default Time;
