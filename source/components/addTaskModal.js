@@ -130,7 +130,6 @@ class AddTaskModal extends React.Component {
                   style={styles.inputName}
                   autoCaptitalize
                   ref={(c) => { this.nameInput = c; }}
-                  autoFocus
                   blurOnSubmit={false}
                   multiline={false}
                   value={this.state.taskName}
