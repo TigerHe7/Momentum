@@ -64,7 +64,7 @@ export default class MyComponent extends Component {
   render() {
     const { state, actions } = this.props.screenProps;
     const { addTask } = { ...actions };
-    const categories = state.focusedTask.categories;
+    const categories = state.appState.categories;
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -87,12 +87,12 @@ export default class MyComponent extends Component {
           style={styles.scrollview}
           alwaysBounceVertical
           overScrollMode="auto"
-          data={state.focusedTask.dailyTasks.map((task, index) => {
+          data={state.appState.dailyTasks.map((task, index) => {
             return {
               ...task,
               key: task.name,
               index,
-              categoryColor: state.focusedTask.categories[task.category].color,
+              categoryColor: state.appState.categories[task.category].color,
             };
           })}
           renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />

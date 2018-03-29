@@ -14,7 +14,7 @@ export default class Focus extends Component {
     } else {
       const fullStateString = await AsyncStorage.getItem('redux_full_state');
       const fullState = JSON.parse(fullStateString);
-      this.props.actions.setFullState(fullState.focusedTask);
+      this.props.actions.setFullState(fullState.appState);
     }
   }
 

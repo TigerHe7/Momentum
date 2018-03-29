@@ -18,7 +18,7 @@ export default class MyComponent extends Component {
     const index = this.props.navigation.state.params.index;
     const categoryColor = this.props.navigation.state.params.categoryColor;
 
-    const task = state.focusedTask.dailyTasks[index];
+    const task = state.appState.dailyTasks[index];
 
     // center button props
     let buttonCenterName = '';

@@ -24,7 +24,7 @@ export default class AddTaskScreen extends Component {
 
   render() {
     const { state } = this.props.screenProps;
-    const categories = state.focusedTask.categories;
+    const categories = state.appState.categories;
     const pickerItems = generatePickerItems(categories);
     // const {startTask, pauseTask, finishTask} = { ...actions };
     return (

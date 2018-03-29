@@ -1,5 +1,5 @@
-import focusedTask from './focusedTask';
+import appState from './appState';
 
 export default {
-  focusedTask,
+  appState,
 };

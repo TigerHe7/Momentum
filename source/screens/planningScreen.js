@@ -5,12 +5,103 @@ import {
   StyleSheet,
   StatusBar,
   FlatList,
+  AsyncStorage,
 } from 'react-native';
 import Colors from './../styles/colors';
 import SprintCard from './../components/sprintCard';
 import Time from './../util/time';
 
 export default class PlanningScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      days: [
+        {
+          date: '20-3-2018',
+          tasks: [
+            {
+              name: 'Walk the dogs',
+              category: 'Personal',
+              secondsSpent: 150,
+              timeEstimate: 30,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+            {
+              name: 'Go grocery shopping',
+              category: 'Personal',
+              secondsSpent: 0,
+              timeEstimate: 60,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+            {
+              name: 'Work out',
+              category: 'Health',
+              secondsSpent: 150,
+              timeEstimate: 120,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+            {
+              name: 'Work on react native app',
+              category: 'Career',
+              secondsSpent: 150,
+              timeEstimate: 75,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+          ],
+        }, {
+          date: '21-3-2018',
+          tasks: [
+            {
+              name: 'Walk the dogs',
+              category: 'Personal',
+              secondsSpent: 150,
+              timeEstimate: 30,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+            {
+              name: 'Go grocery shopping',
+              category: 'Personal',
+              secondsSpent: 0,
+              timeEstimate: 60,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+            {
+              name: 'Work out',
+              category: 'Health',
+              secondsSpent: 150,
+              timeEstimate: 120,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+            {
+              name: 'Work on react native app',
+              category: 'Career',
+              secondsSpent: 150,
+              timeEstimate: 75,
+              taskTimeIntervals: [],
+              currentTaskState: 'PAUSED',
+            },
+          ],
+        },
+      ],
+    };
+  }
+
+  async componentWillMount() {
+    const storedDatesString = await AsyncStorage.get('stored_dates');
+    const storedDates = JSON.parse(storedDatesString).storedDates;
+    const data = storedDates.forEach((dateString) => {
+      return AsyncStorage.get(dateString);
+    });
+    this.setState({ days: data });
+  }
+
   renderTaskCards({ item }) {
     return (
       <View style={styles.cardContainer}>
@@ -29,7 +120,7 @@ export default class PlanningScreen extends Component {
         <StatusBar hidden />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
-            {'Your Sprints'}
+            {'Progress'}
           </Text>
           <Text style={styles.titleDate}>
             {Time.getCurrentFormattedDate()}
@@ -40,11 +131,10 @@ export default class PlanningScreen extends Component {
           style={styles.scrollview}
           alwaysBounceVertical
           overScrollMode="auto"
-          data={state.focusedTask.sprints.map((sprint, index) => {
+          data={this.state.days.map((day) => {
             return {
-              ...sprint,
-              key: sprint.start,
-              index,
+              ...day,
+              key: day.date,
             };
           })}
           renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
