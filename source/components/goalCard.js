@@ -79,6 +79,7 @@ class GoalCard extends React.Component {
     });
     const currentTime = Time.formatFromSeconds(timeSpent);
     const maxTimeText = Time.formatFromSeconds(data.timeEstimate * 60, true);
+    const timeText = timeSpent === 0 ? maxTimeText : `${currentTime} / ${maxTimeText}`;
 
     // center button props
     let buttonCenterName = '';
@@ -127,7 +128,7 @@ class GoalCard extends React.Component {
             <CategoryIdentifier color={categoryColor}>
               {category}
             </CategoryIdentifier>
-            <Text style={styles.text}>{`${currentTime} / ${maxTimeText}`}</Text>
+            <Text style={styles.text}>{timeText}</Text>
           </View>
 
           { this.state.expanded &&
