@@ -9,7 +9,6 @@ export default class Focus extends Component {
     const firstRun = await AsyncStorage.getItem('first_run');
     if (firstRun !== 'false') {
       await AsyncStorage.setItem('first_run', 'false');
-      await AsyncStorage.setItem('dateJoined', Time.getCurrentDateString());
       this.props.actions.setDefaultState();
     } else {
       const fullStateString = await AsyncStorage.getItem('redux_full_state');

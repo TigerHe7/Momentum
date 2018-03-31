@@ -1,6 +1,5 @@
 const React = require('React');
 const StyleSheet = require('StyleSheet');
-const Text = require('Text');
 const View = require('View');
 const Modal = require('Modal');
 const StatusBar = require('StatusBar');
@@ -10,35 +9,27 @@ import Colors from './../styles/colors';
 
 const colorSize = 8;
 
-const testingInitialState = {
+const initialState = {
   categoryColor: 'grey',
-  taskName: 'Eat food',
-  category: 'Personal',
-  startingTime: 'Now',
-  timeEstimate: '182',
+  taskName: '',
+  category: '',
+  startingTime: '',
+  timeEstimate: '',
 };
 
-const initialState = testingInitialState;
-// = {
-//   categoryColor: 'grey',
-//   taskName: '',
-//   category: '',
-//   startingTime: '',
-//   timeEstimate: '',
-// };
-
 class AddTaskModal extends React.Component {
-  state = initialState;
+  constructor(props) {
+    super(props);
+    this.state = initialState;
+  }
 
   render() {
     const {
       visible,
       changeVisibility,
-      keyboardHeight,
-      categories,
+      goals,
       addTaskAction,
     } = this.props;
-    const cardStyle = [styles.view, { marginBottom: 0 }];
     const colorStyle = [styles.color, { backgroundColor: this.state.categoryColor }];
     return (
       <Modal
@@ -52,7 +43,7 @@ class AddTaskModal extends React.Component {
         <View style={styles.container}>
           <StatusBar hidden />
           {visible &&
-            <View style={cardStyle}>
+            <View style={styles.cardContainer}>
               <View style={styles.buttonContainer}>
                 <View style={styles.singleButtonContainer}>
                   <View style={colorStyle} />
@@ -65,9 +56,9 @@ class AddTaskModal extends React.Component {
                     multiline={false}
                     value={this.state.category}
                     onChangeText={(category) => {
-                      if (categories[category]) {
+                      if (goals[category]) {
                         this.setState({
-                          categoryColor: categories[category].color,
+                          categoryColor: goals[category].color,
                           category,
                         });
                       } else {
@@ -104,7 +95,6 @@ class AddTaskModal extends React.Component {
                     ref={(c) => { this.timeEstimateInput = c; }}
                     style={styles.inputCategory}
                     autoCaptitalize
-                    // blurOnSubmit={false}
                     multiline={false}
                     value={this.state.timeEstimate}
                     onChangeText={timeEstimate => this.setState({ timeEstimate })}
@@ -119,7 +109,6 @@ class AddTaskModal extends React.Component {
                           currentTaskState: 'PAUSED',
                         });
                         this.setState({ ...initialState });
-                        // this.nameInput.focus();
                       }} />
                 </View>
               </View>
@@ -154,7 +143,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.15)',
   },
-  view: {
+  cardContainer: {
     opacity: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -163,6 +152,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: '100%',
     elevation: 4,
+    marginBottom: 0,
   },
   inputContainer: {
     height: 60,

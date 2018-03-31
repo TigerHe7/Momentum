@@ -20,4 +20,5 @@ export default {
   buttonBackgroundLog: '#7F7F7F',
   descriptionContainer: '#E8E8E8',
   addButton: '#2D5A9E',
+  defaultGrey: 'lightgrey',
 };

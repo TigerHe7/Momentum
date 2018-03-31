@@ -37,25 +37,14 @@ export default class MyComponent extends Component {
     this.setState({ modalVisible: false });
   }
 
-  addTask() {
-    requestAnimationFrame(() => {
-      this.props.navigation.navigate('AddTaskScreen');
-    });
-  }
-
-  renderTaskCards({ item }) {
+  renderTaskCards(item, actions) {
     return (
       <View style={styles.taskCardContainer}>
         <GoalCard
           data={item}
-          removeTaskAction={() => this.props.screenProps.actions.removeTask(item.index)}
+          actions={actions}
           categoryColor={item.categoryColor}
-          onPress={() => {
-            this.props.navigation.navigate('FocusScreen', {
-            index: item.index,
-            categoryColor: item.categoryColor,
-          });
-          }} />
+          index={item.index} />
         <View style={styles.divider} />
       </View>
     );
@@ -63,17 +52,17 @@ export default class MyComponent extends Component {
 
   render() {
     const { state, actions } = this.props.screenProps;
-    const { addTask } = { ...actions };
-    const categories = state.appState.categories;
+    const goals = state.appState.goals;
     return (
       <View style={styles.container}>
         <StatusBar hidden />
         <AddTaskModal
           visible={this.state.modalVisible}
-          categories={categories}
+          goals={goals}
           keyboardHeight={this.state.keyboardHeight}
-          addTaskAction={addTask}
+          addTaskAction={actions.addTask}
           changeVisibility={() => { this.setState({ modalVisible: !this.state.modalVisible }); }} />
+
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {'Today'}
@@ -83,6 +72,7 @@ export default class MyComponent extends Component {
           </Text>
         </View>
         <View style={styles.divider} />
+
         <FlatList
           style={styles.scrollview}
           alwaysBounceVertical
@@ -92,10 +82,11 @@ export default class MyComponent extends Component {
               ...task,
               key: task.name,
               index,
-              categoryColor: state.appState.categories[task.category].color,
+              categoryColor: state.appState.goals[task.category].color,
             };
           })}
-          renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
+          renderItem={({ item }) => { return this.renderTaskCards(item, actions); }} />
+
         { !this.state.modalVisible &&
           <CircleButton
             title="+"

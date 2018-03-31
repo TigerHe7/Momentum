@@ -1,21 +1,10 @@
 import * as types from '../actions/actionTypes';
 import CategoryColors from '../styles/categoryColors';
+import TaskTypes from '../util/taskTypes';
+import Time from '../util/time';
 
 const initialState = {
-  categories: {
-    Personal: {
-      color: CategoryColors.indigo,
-    },
-    Career: {
-      color: CategoryColors.red,
-    },
-    Health: {
-      color: CategoryColors.yellow,
-    },
-    Misc: {
-      color: CategoryColors.yellow,
-    },
-  },
+  dateString: Time.getCurrentDateString(),
   dailyTasks: [
     {
       name: 'Walk the dogs',
@@ -50,6 +39,44 @@ const initialState = {
       currentTaskState: 'PAUSED',
     },
   ],
+  goals: {
+    Personal: {
+      color: CategoryColors.indigo,
+      habits: [
+        {
+          name: 'Walk the dogs',
+          type: TaskTypes.COMPLETED,
+          taskDetails: {},
+        },
+      ],
+    },
+    Career: {
+      color: CategoryColors.red,
+      habits: [
+        {
+          name: 'Work on personal project',
+          type: TaskTypes.TIMED,
+          taskDetails: {
+            startTime: 60, // max 1440
+            timeEstimate: 30,
+          },
+        },
+      ],
+    },
+    Health: {
+      color: CategoryColors.yellow,
+      habits: [
+        {
+          name: 'Work out',
+          type: TaskTypes.TIMED,
+          taskDetails: {
+            startTime: 60, // max 1440
+            timeEstimate: 30,
+          },
+        },
+      ],
+    },
+  },
 };
 
 export default function appState(state = initialState, action = {}) {

@@ -5,46 +5,127 @@ const TouchableNativeFeedback = require('TouchableNativeFeedback');
 const View = require('View');
 
 import CategoryIdentifier from './../components/categoryIdentifier';
+import ProgressBar from './../components/progressBar';
+import RoundedButton from './../components/roundedButton';
 import Time from './../util/time';
+import Colors from './../styles/colors';
+
+
+const getRemainingTime = (data) => {
+  let time = (data.timeEstimate * 60) - data.secondsSpent;
+  if (time < 0) time = 0;
+  return Time.formatFromSeconds(time, true);
+};
 
 class GoalCard extends React.Component {
-  handleOnPress(func) {
-    requestAnimationFrame(() => {
-      func();
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+    };
   }
 
   render() {
     const {
-      onPress,
+      index,
       data,
       categoryColor,
-      removeTaskAction,
+      actions,
     } = this.props;
-    const { name, category } = data;
+    const {
+      name,
+      category,
+      taskTimeIntervals,
+      timeEstimate,
+      currentTaskState,
+    } = data;
 
-    let time = (data.timeEstimate * 60) - data.secondsSpent;
-    if (time < 0) time = 0;
-    const timeString = Time.formatFromSeconds(time, true);
+    const timeString = getRemainingTime(data);
+    let progress;
+    if (currentTaskState === 'PAUSED') {
+      if (taskTimeIntervals.length === 0) {
+        progress = ' '
+      } else {
+        progress = 'Started'
+      }
+    } else if (currentTaskState === 'STARTED') {
+      progress = 'In Progress'
+    }
 
-    const progress = ' ';
+    const containerStyle = [styles.container];
+    if (this.state.expanded) {
+      containerStyle.push({
+        height: 150,
+      });
+    }
+
+    // center button props
+    let buttonCenterName = '';
+    let buttonCenterAction = () => {};
+    let buttonCenterColor = 'grey';
+    if (currentTaskState === 'STARTED') {
+      buttonCenterName = 'Pause';
+      buttonCenterAction = actions.pauseTask;
+      buttonCenterColor = categoryColor; // Colors.buttonBackgroundPause;
+    } else if (currentTaskState === 'PAUSED' || currentTaskState === 'FINISHED') {
+      buttonCenterName = 'Start';
+      buttonCenterAction = actions.startTask;
+      buttonCenterColor = Colors.buttonBackgroundStart;
+    }
 
     return (
       <TouchableNativeFeedback
-        style={styles.touchable}
         useForeground
-        onLongPress={removeTaskAction}
+        onLongPress={() => { actions.removeTask(index); }}
         background={TouchableNativeFeedback.SelectableBackground()}
-        onPress={() => { this.handleOnPress(onPress); }} >
-        <View style={styles.container}>
-          <View style={styles.textContainer}>
-            <Text style={styles.nameText}>{name}</Text>
-            <CategoryIdentifier color={categoryColor}>{category}</CategoryIdentifier>
-          </View>
-          <View style={styles.statsContainer}>
+        onPress={() => { this.setState({ expanded: !this.state.expanded }); }} >
+        <View style={containerStyle}>
+
+          <View style={styles.topContainer}>
+            <Text style={styles.nameText}>
+              {name}
+            </Text>
+            { !this.state.expanded &&
             <Text style={styles.progressText}>{progress}</Text>
+            }
+          </View>
+
+          <View style={styles.statsContainer}>
+            <CategoryIdentifier color={categoryColor}>
+              {category}
+            </CategoryIdentifier>
             <Text style={styles.text}>{timeString}</Text>
           </View>
+
+          { this.state.expanded &&
+            <View style={{ height: 16 }} />
+          }
+
+          { this.state.expanded &&
+            <ProgressBar
+              taskTimeIntervals={taskTimeIntervals}
+              maxTime={timeEstimate}
+              barColor={buttonCenterColor} />
+          }
+
+          { this.state.expanded &&
+            <View style={{ height: 16 }} />
+          }
+
+          { this.state.expanded &&
+            <View style={styles.buttonContainer}>
+              <RoundedButton
+                title={buttonCenterName}
+                onPress={() => { buttonCenterAction(index); }}
+                color={buttonCenterColor} />
+              <View style={{ width: 12 }} />
+              <RoundedButton
+                title="Finish"
+                onPress={() => { actions.finishTask(index); }}
+                color={Colors.buttonBackgroundFinish} />
+            </View>
+          }
+
         </View>
       </TouchableNativeFeedback>
     );
@@ -55,22 +136,21 @@ const styles = StyleSheet.create({
   container: {
     height: 85,
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 16,
   },
-  textContainer: {
-    height: '100%',
-    width: '50%',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+  topContainer: {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   statsContainer: {
-    height: '100%',
-    width: '50%',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   text: {
     fontSize: 12,
@@ -80,8 +160,12 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   progressText: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 5,
+  },
+  buttonContainer: {
+    flexDirection: 'row-reverse',
+    width: '100%',
   },
 });
 

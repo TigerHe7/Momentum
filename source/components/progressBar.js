@@ -6,10 +6,7 @@ const View = require('View');
 import Colors from './../styles/colors';
 import Time from './../util/time';
 
-class ProgressBar extends React.Component<{
-  taskTimeIntervals: any,
-  maxTime: number, // in minutes
-}> {
+class ProgressBar extends React.Component {
   // refresh functionality
   componentDidMount() {
     this.interval = setInterval(() => this.setState({}), 50);
@@ -19,7 +16,7 @@ class ProgressBar extends React.Component<{
   }
 
   render() {
-    const { taskTimeIntervals } = this.props;
+    const { taskTimeIntervals, maxTime, barColor } = this.props;
 
     let timeSpent = 0;
     const intervals = taskTimeIntervals.slice();
@@ -32,23 +29,24 @@ class ProgressBar extends React.Component<{
         timeSpent += Math.floor((end.getTime() - start.getTime()) / 1000);
       }
     });
+    const progressBarFillStyle = [styles.progressBar];
+    if (barColor) {
+      progressBarFillStyle.push({ backgroundColor: barColor });
+    }
 
-    const currentTime = Time.formatFromSeconds(timeSpent);
-    const maxTime = Time.formatFromSeconds(this.props.maxTime * 60);
-    const percentageCompletion = (timeSpent / (this.props.maxTime * 60)) * 100;
+    // const currentTime = Time.formatFromSeconds(timeSpent);
+    // const maxTimeText = Time.formatFromSeconds(maxTime * 60);
+    const percentageCompletion = (timeSpent / (maxTime * 60)) * 100;
     const barPercentage = percentageCompletion >= 100 ? '100%' : `${Math.floor(percentageCompletion)}%`;
     return (
       <View style={styles.container}>
-        <View style={styles.textContainer}>
+        {/* <View style={styles.textContainer}>
           <Text style={styles.timeText}>
-            {currentTime}
+            {`${currentTime} / ${maxTimeText}`}
           </Text>
-          <Text style={styles.timeText}>
-            {maxTime}
-          </Text>
-        </View>
+        </View> */}
         <View style={styles.progressBarBase}>
-          <View style={[styles.progressBar, { width: barPercentage }]} />
+          <View style={[progressBarFillStyle, { width: barPercentage }]} />
         </View>
       </View>
     );
@@ -62,18 +60,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  timeText: {
-    fontSize: 14,
-    marginBottom: 10,
-  },
+  // textContainer: {
+  //   width: '100%',
+  //   flexDirection: 'row',
+  //   justifyContent: 'flex-end',
+  // },
+  // timeText: {
+  //   fontSize: 14,
+  //   marginBottom: 10,
+  // },
   progressBarBase: {
     width: '100%',
-    height: 5,
+    height: 6,
     backgroundColor: Colors.progressBarBackground,
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
   progressBar: {
     backgroundColor: Colors.progressBarFill,
     height: '100%',
-    borderRadius: 5,
+    borderRadius: 6,
   },
 });
 

@@ -31,7 +31,7 @@ class RoundedButton extends React.Component {
     } = this.props;
     const touchableStyles = [styles.touchable, this.state.viewStyles];
     if (color) {
-      touchableStyles.push({ backgroundColor: color });
+      touchableStyles.push({ borderColor: color });
     }
     return (
       <View style={styles.container}>
@@ -50,22 +50,21 @@ class RoundedButton extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: 90,
-    height: 35,
+    width: 80,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   touchable: {
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 2,
-    backgroundColor: 'grey',
+    backgroundColor: Colors.background,
     borderRadius: 24,
     width: 85,
     height: 35,
+    borderWidth: 2,
   },
   text: {
-    color: Colors.textLight,
     textAlign: 'center',
     fontWeight: '200',
     fontSize: 14,

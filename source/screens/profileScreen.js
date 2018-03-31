@@ -10,19 +10,7 @@ import {
 export default class ProfileScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      goals: [
-        {
-          category: '',
-          name: '',
-          description: '',
-          recuring: {
-            type: '', // day, week, month
-            index: [],
-          },
-        },
-      ],
-    };
+    this.state = {};
   }
 
   render() {
@@ -53,9 +41,10 @@ export default class ProfileScreen extends Component {
             <Text style={styles.statSecondary}>completed</Text>
           </View>
         </View>
+
         <View style={styles.divider} />
 
-        <FlatList
+        {/* <FlatList
           style={styles.scrollview}
           alwaysBounceVertical
           overScrollMode="auto"
@@ -65,7 +54,7 @@ export default class ProfileScreen extends Component {
               index,
             };
           })}
-          renderItem={({ item }) => { return this.renderTaskCards({ item }); }} />
+          renderItem={({ item }) => { return this.renderTaskCards({ item }); }} /> */}
 
       </View>
     );
@@ -77,9 +66,6 @@ const profilePicSize = 80;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollview: {
-
   },
   divider: {
     width: '100%',
