@@ -55,6 +55,8 @@ class GoalCard extends React.Component {
       }
     } else if (currentTaskState === 'STARTED') {
       progress = 'In Progress';
+    } else if (currentTaskState === 'FINISHED') {
+      progress = 'Finished';
     }
 
     const containerStyle = [styles.container];
@@ -150,10 +152,15 @@ class GoalCard extends React.Component {
                 onPress={() => { buttonCenterAction(index); }}
                 color={buttonCenterColor} />
               <View style={{ width: 12 }} />
+              {currentTaskState !== 'FINISHED' &&
               <RoundedButton
                 title="Finish"
-                onPress={() => { actions.finishTask(index); }}
+                onPress={() => {
+                  actions.finishTask(index);
+                  this.setState({ expanded: false });
+                }}
                 color={Colors.buttonBackgroundFinish} />
+              }
             </View>
           }
 
