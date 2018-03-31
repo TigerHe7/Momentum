@@ -103,7 +103,6 @@ class AddTaskModal extends React.Component {
                         addTaskAction({
                           name: this.state.taskName,
                           category: this.state.category,
-                          secondsSpent: 0,
                           timeEstimate: Number(this.state.timeEstimate),
                           taskTimeIntervals: [],
                           currentTaskState: 'PAUSED',

@@ -1,9 +1,11 @@
 const React = require('React');
 const StyleSheet = require('StyleSheet');
+const TouchableOpacity = require('TouchableOpacity');
 const Text = require('Text');
 const TouchableNativeFeedback = require('TouchableNativeFeedback');
 const View = require('View');
 
+import Octicons from 'react-native-vector-icons/Octicons';
 import CategoryIdentifier from './../components/categoryIdentifier';
 import ProgressBar from './../components/progressBar';
 import RoundedButton from './../components/roundedButton';
@@ -11,18 +13,21 @@ import Time from './../util/time';
 import Colors from './../styles/colors';
 
 
-const getRemainingTime = (data) => {
-  let time = (data.timeEstimate * 60) - data.secondsSpent;
-  if (time < 0) time = 0;
-  return Time.formatFromSeconds(time, true);
-};
-
 class GoalCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
     };
+  }
+
+  // refresh functionality
+  // TODO move to time left component not made yet
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({}), 50);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
@@ -40,16 +45,16 @@ class GoalCard extends React.Component {
       currentTaskState,
     } = data;
 
-    const timeString = getRemainingTime(data);
+    // const timeString = getRemainingTime(data);
     let progress;
     if (currentTaskState === 'PAUSED') {
       if (taskTimeIntervals.length === 0) {
-        progress = ' '
+        progress = ' ';
       } else {
-        progress = 'Started'
+        progress = 'Started';
       }
     } else if (currentTaskState === 'STARTED') {
-      progress = 'In Progress'
+      progress = 'In Progress';
     }
 
     const containerStyle = [styles.container];
@@ -58,6 +63,20 @@ class GoalCard extends React.Component {
         height: 150,
       });
     }
+
+    let timeSpent = 0;
+    const intervals = taskTimeIntervals.slice();
+    if (intervals.length % 2 === 1) {
+      intervals.push(new Date());
+    }
+    intervals.forEach((start, intervalsIndex) => {
+      if (intervalsIndex % 2 === 0) {
+        const end = intervals[intervalsIndex + 1];
+        timeSpent += Math.floor((end.getTime() - start.getTime()) / 1000);
+      }
+    });
+    const currentTime = Time.formatFromSeconds(timeSpent);
+    const maxTimeText = Time.formatFromSeconds(data.timeEstimate * 60, true);
 
     // center button props
     let buttonCenterName = '';
@@ -76,10 +95,22 @@ class GoalCard extends React.Component {
     return (
       <TouchableNativeFeedback
         useForeground
-        onLongPress={() => { actions.removeTask(index); }}
         background={TouchableNativeFeedback.SelectableBackground()}
         onPress={() => { this.setState({ expanded: !this.state.expanded }); }} >
         <View style={containerStyle}>
+
+          { this.state.expanded &&
+          <TouchableOpacity
+            style={{
+              position: 'absolute',
+              right: 0,
+              padding: 12,
+            }}
+            onPress={() => { actions.removeTask(index); }}
+            >
+            <Octicons name="x" size={18} color="grey" />
+          </TouchableOpacity>
+          }
 
           <View style={styles.topContainer}>
             <Text style={styles.nameText}>
@@ -94,7 +125,7 @@ class GoalCard extends React.Component {
             <CategoryIdentifier color={categoryColor}>
               {category}
             </CategoryIdentifier>
-            <Text style={styles.text}>{timeString}</Text>
+            <Text style={styles.text}>{`${currentTime} / ${maxTimeText}`}</Text>
           </View>
 
           { this.state.expanded &&

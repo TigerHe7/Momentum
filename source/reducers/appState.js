@@ -9,7 +9,6 @@ const initialState = {
     {
       name: 'Walk the dogs',
       category: 'Personal',
-      secondsSpent: 150,
       timeEstimate: 30,
       taskTimeIntervals: [],
       currentTaskState: 'PAUSED',
@@ -17,7 +16,6 @@ const initialState = {
     {
       name: 'Go grocery shopping',
       category: 'Personal',
-      secondsSpent: 0,
       timeEstimate: 60,
       taskTimeIntervals: [],
       currentTaskState: 'PAUSED',
@@ -25,7 +23,6 @@ const initialState = {
     {
       name: 'Work out',
       category: 'Health',
-      secondsSpent: 150,
       timeEstimate: 120,
       taskTimeIntervals: [],
       currentTaskState: 'PAUSED',
@@ -33,7 +30,6 @@ const initialState = {
     {
       name: 'Work on react native app',
       category: 'Career',
-      secondsSpent: 150,
       timeEstimate: 75,
       taskTimeIntervals: [],
       currentTaskState: 'PAUSED',
