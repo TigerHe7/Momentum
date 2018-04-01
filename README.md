@@ -4,14 +4,13 @@
 
 A tool to declare long term goal and break them down into the necessary recurring daily or weekly tasks. Focus is being put on making the tracking, reflecting, and pivoting process as seamless as possible.
 
-// built with react-native and redux
+Built with react-native and redux
 
-Inline-style:
-![profile screen](https://github.com/tigerhe7/momentum/master/demo/screen1.jpg "Proile Screen")
+Profile Screen             |  History Screen           | Profile Screen
+:-------------------------:|:-------------------------:|:-------------------------:
+![daily tasks screen](/demo/screen2.jpg "Daily Tasks Screen") | ![history screen](/demo/screen3.jpg "History Screen") | ![profile screen](/demo/screen1.jpg "Profile Screen")
 
-![daily tasks screen](https://github.com/tigerhe7/momentum/master/demo/screen2.jpg "Daily Tasks Screen")
 
-![history screen](https://github.com/tigerhe7/momentum/master/demo/screen3.jpg "History Screen")
 
 #### Installation
 
