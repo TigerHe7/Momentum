@@ -4,6 +4,9 @@
 
 A tool to declare long term goal and break them down into the necessary recurring daily or weekly tasks. Focus is being put on making the tracking, reflecting, and pivoting process as seamless as possible.
 
+Check out a small write-up I did about my idea:
+https://medium.com/@tigerhe7/momentum-my-march-madness-dc189874d604
+
 Built with react-native and redux
 
 Profile Screen             |  History Screen           | Profile Screen
