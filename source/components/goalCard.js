@@ -120,7 +120,9 @@ class GoalCard extends React.Component {
               {name}
             </Text>
             { !this.state.expanded &&
-            <Text style={styles.progressText}>{progress}</Text>
+            <Text style={styles.progressText}>
+              {progress}
+            </Text>
             }
           </View>
 
@@ -128,7 +130,9 @@ class GoalCard extends React.Component {
             <CategoryIdentifier color={categoryColor}>
               {category}
             </CategoryIdentifier>
-            <Text style={styles.text}>{timeText}</Text>
+            <Text style={styles.text}>
+              {timeText}
+            </Text>
           </View>
 
           { this.state.expanded &&

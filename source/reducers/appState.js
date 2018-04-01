@@ -73,6 +73,41 @@ const initialState = {
       ],
     },
   },
+  pastTasks: [
+    {
+      dateString: Time.getCurrentDateString(),
+      dailyTasks: [
+        {
+          name: 'Walk the dogs',
+          category: 'Personal',
+          timeEstimate: 30,
+          taskTimeIntervals: [],
+          currentTaskState: 'PAUSED',
+        },
+        {
+          name: 'Go grocery shopping',
+          category: 'Personal',
+          timeEstimate: 60,
+          taskTimeIntervals: [],
+          currentTaskState: 'PAUSED',
+        },
+        {
+          name: 'Work out',
+          category: 'Health',
+          timeEstimate: 120,
+          taskTimeIntervals: [],
+          currentTaskState: 'PAUSED',
+        },
+        {
+          name: 'Work on react native app',
+          category: 'Career',
+          timeEstimate: 75,
+          taskTimeIntervals: [],
+          currentTaskState: 'PAUSED',
+        },
+      ],
+    }
+  ],
 };
 
 export default function appState(state = initialState, action = {}) {

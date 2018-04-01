@@ -16,15 +16,33 @@ export default class PlanningScreen extends Component {
     this.state = {};
   }
 
-  async componentWillMount() {
-    const storedTasksStrings = await AsyncStorage.getItem('stored_tasks');
-    if (storedTasksStrings) {
-      const storedTasks = JSON.parse(storedTasksStrings).storedTasks;
-      this.setState({ storedTasks });
-    }
+  renderTasks(item, goals) {
+    return (
+      <View>
+        <SprintCard
+          data={item}
+          onPress={() => {}}
+          goals={goals}
+        />
+        <View style={styles.divider} />
+      </View>
+    );
   }
 
   render() {
+    const { pastTasks, goals } = this.props.screenProps.state.appState;
+    const toRender = pastTasks.slice();
+    const numberOfDays = toRender.length;
+
+    // AsyncStorage.getItem('stored_tasks')
+    //   .then((storedTasksStrings) => {
+    //     if (storedTasksStrings) {
+    //       const storedTasks = JSON.parse(storedTasksStrings).storedTasks;
+    //       this.setState({ storedTasks });
+    //       toRender.concat(this.state.storedTasks);
+    //     }
+    //   });
+
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -32,9 +50,23 @@ export default class PlanningScreen extends Component {
           <Text style={styles.title}>
             {'Progress'}
           </Text>
+          <Text style={styles.titleSubheader}>
+            {`${numberOfDays} days`}
+          </Text>
         </View>
         <View style={styles.divider} />
         {/* FlatList w/ stored tasks */}
+        <FlatList
+          style={styles.list}
+          overScrollMode="auto"
+          data={toRender.map((day, index) => {
+            return {
+              ...day,
+              key: day.dateString,
+              index,
+            };
+          })}
+          renderItem={({ item }) => { return this.renderTasks(item, goals); }} />
       </View>
     );
   }
@@ -48,24 +80,31 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
   },
   titleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
     height: 25,
     width: '100%',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     paddingHorizontal: 16,
     marginTop: 50,
     marginBottom: 10,
   },
   title: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '500',
-    marginRight: 10,
+    marginBottom: 0,
+  },
+  titleSubheader: {
+
   },
   divider: {
     width: '100%',
     height: 0.8,
     backgroundColor: 'grey',
     opacity: 0.2,
+  },
+  list: {
+    width: '100%',
+    height: '100%',
   },
 });
