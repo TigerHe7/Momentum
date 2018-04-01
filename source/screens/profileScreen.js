@@ -7,13 +7,31 @@ import {
   FlatList,
 } from 'react-native';
 
+import GoalSettingCard from './../components/goalSettingCard';
+import Octicons from 'react-native-vector-icons/Octicons';
+
 export default class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  renderTasks(item) {
+    return (
+      <View>
+        <GoalSettingCard
+          data={item}
+          onPress={() => {}}
+        />
+        <View style={styles.divider} />
+      </View>
+    );
+  }
+
   render() {
+    const { goals } = this.props.screenProps.state.appState;
+    const namesOfGoals = Object.keys(goals);
+
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -21,9 +39,10 @@ export default class ProfileScreen extends Component {
         <View style={styles.titleContainer}>
           <View style={styles.profilePic} />
           <View style={styles.descriptionContainer}>
-            <Text style={styles.title}>Tiger He</Text>
-            <Text>This is the description</Text>
+            <Text style={styles.title}>Jeff Bezos</Text>
+            <Text>Aspiring software engineer and student athlete</Text>
           </View>
+          <Octicons name="kebab-vertical" size={24} color="grey" />
         </View>
 
         <View style={styles.divider} />
@@ -44,17 +63,18 @@ export default class ProfileScreen extends Component {
 
         <View style={styles.divider} />
 
-        {/* <FlatList
-          style={styles.scrollview}
-          alwaysBounceVertical
+        <FlatList
+          style={styles.list}
           overScrollMode="auto"
-          data={this.state.goals.map((goal, index) => {
+          data={namesOfGoals.map((goalName, index) => {
             return {
-              ...goal,
+              ...goals[goalName],
+              goalName,
+              key: goalName,
               index,
             };
           })}
-          renderItem={({ item }) => { return this.renderTaskCards({ item }); }} /> */}
+          renderItem={({ item }) => { return this.renderTasks(item); }} />
 
       </View>
     );
@@ -80,12 +100,15 @@ const styles = StyleSheet.create({
   titleContainer: {
     width: '100%',
     flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 32,
     marginBottom: 32,
+    paddingRight: 20,
   },
   descriptionContainer: {
     flex: 1,
     justifyContent: 'center',
+    width: '100%',
   },
   profilePic: {
     height: profilePicSize,
@@ -114,5 +137,17 @@ const styles = StyleSheet.create({
   },
   statSecondary: {
     fontSize: 12,
+  },
+  kebab: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // height: 40,
+    // width: 40,
+    right: 8,
+    top: 24,
+    // borderRadius: 24,
+    // borderWidth: 2,
+    // borderColor: 'grey',
   },
 });
